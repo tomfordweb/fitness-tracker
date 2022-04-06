@@ -14,3 +14,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.form-control {
+  margin-bottom: 20px;
+}
