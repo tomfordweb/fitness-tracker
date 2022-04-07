@@ -1,3 +1,4 @@
+import { Breadcrumbs, Typography } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -22,37 +23,39 @@ export const AppBreadcrumbs = () => {
       const linkPath = router.asPath.split("/");
       linkPath.shift();
 
-      const pathArray = linkPath.map((path, i) => {
-        return {
-          breadcrumb: path,
-          href: "/" + linkPath.slice(0, i + 1).join("/"),
-        };
-      });
+      const pathArray = linkPath
+        .map((path, i) => {
+          return {
+            breadcrumb: path,
+            href: "/" + linkPath.slice(0, i + 1).join("/"),
+          };
+        })
+        .filter((bc) => bc.breadcrumb.length > 0);
 
       setBreadcrumbs(pathArray);
     }
   }, [router]);
 
-  if (!breadcrumbs) {
+  if (!breadcrumbs.length) {
     return null;
   }
 
   return (
-    <nav aria-label="breadcrumbs">
-      <ol className="breadcrumb">
-        <li>
-          <a href="/">HOME</a>
-        </li>
-        {breadcrumbs.map((breadcrumb, i) => {
-          return (
-            <li key={breadcrumb.href}>
-              <Link href={breadcrumb.href}>
-                <a>{convertBreadcrumb(breadcrumb.breadcrumb)}</a>
-              </Link>
-            </li>
-          );
-        })}
-      </ol>
-    </nav>
+    <Breadcrumbs aria-label="breadcrumb">
+      <Link href="/">HOME</Link>
+      {breadcrumbs.map((breadcrumb, i) => {
+        return (
+          <Link key={i} href={breadcrumb.href}>
+            {i === breadcrumbs.length - 1 ? (
+              <Typography color="text.primary">
+                {convertBreadcrumb(breadcrumb.breadcrumb)}
+              </Typography>
+            ) : (
+              convertBreadcrumb(breadcrumb.breadcrumb)
+            )}
+          </Link>
+        );
+      })}
+    </Breadcrumbs>
   );
 };
