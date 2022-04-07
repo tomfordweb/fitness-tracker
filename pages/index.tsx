@@ -1,6 +1,12 @@
-import { Card, CardActions, CardContent, Typography } from "@mui/material";
+import {
+  Card,
+  CardActions,
+  CardContent,
+  Chip,
+  Typography,
+} from "@mui/material";
 import type { NextPage } from "next";
-import Link from "next/link";
+import Link from "../component/link";
 import { CALCULATORS } from "../lib/constant";
 
 const Home: NextPage = () => {
@@ -31,7 +37,12 @@ const Home: NextPage = () => {
                   <Link href={card.href}>{card.linkText}</Link>
                   <CardActions>
                     {card.calculators.map((link) => (
-                      <Link href={link.href}>{link.linkText}</Link>
+                      <Chip
+                        component={Link}
+                        clickable
+                        label={link.linkText}
+                        href={link.href}
+                      ></Chip>
                     ))}
                   </CardActions>
                 </CardContent>

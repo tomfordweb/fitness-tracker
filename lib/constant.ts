@@ -1,3 +1,28 @@
+import { calculateJacksonPollock7Point } from "./calculators";
+
+export const BODYFAT_CALCULATORS = [
+  {
+    href: "",
+    linkText: "Jackson & Pollock 3 Point Bodyfat Calculator",
+  },
+  {
+    href: "",
+    linkText: "Jackson & Pollock 4 Point Bodyfat Calculator",
+  },
+  {
+    href: "/bodyfat-calculator/jackson-pollock-7-point",
+    linkText: "Jackson & Pollock 7 Point Bodyfat Calculator",
+    calculator: calculateJacksonPollock7Point,
+  },
+  {
+    href: "/bodyfat-calculator/us-navy-girth",
+    linkText: "US Navy",
+  },
+  {
+    href: "",
+    linkText: "Waist-to-Hip ratio",
+  },
+];
 export const CALCULATORS: {
   category: string;
   groups: {
@@ -21,12 +46,7 @@ export const CALCULATORS: {
           "Determine your body fat percentage using a variety of easy to use calculators!",
         href: "/bodyfat-calculator",
         linkText: "Calculate Bodyfat Percentage",
-        calculators: [
-          {
-            href: "/bodyfat-calculator/jackson-pollock-7-point",
-            linkText: "Jackson & Pollock 7 Point Bodyfat Calculator",
-          },
-        ],
+        calculators: BODYFAT_CALCULATORS,
       },
       {
         title: "TDEE and BMR Calculators",
@@ -43,7 +63,7 @@ export const CALCULATORS: {
     ],
   },
   {
-    category: "Lifting",
+    category: "Strength",
     groups: [
       {
         title: "1RM Calculators",
@@ -53,11 +73,23 @@ export const CALCULATORS: {
         calculators: [
           {
             href: "",
-            linkText: "Back Squat 1RM Calculator",
+            linkText: "Back Squat",
           },
           {
             href: "",
-            linkText: "Deadlift 1RM Calculator",
+            linkText: "Deadlift",
+          },
+          {
+            href: "",
+            linkText: "Bench Press",
+          },
+          {
+            href: "",
+            linkText: "Bent over Row",
+          },
+          {
+            href: "",
+            linkText: "Overhead Press",
           },
         ],
       },

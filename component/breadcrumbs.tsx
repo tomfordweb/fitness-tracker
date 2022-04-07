@@ -1,5 +1,5 @@
 import { Breadcrumbs, Typography } from "@mui/material";
-import Link from "next/link";
+import Link from "./link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 

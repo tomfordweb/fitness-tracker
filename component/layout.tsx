@@ -1,6 +1,5 @@
 import { AppBar, Container, Toolbar, Typography } from "@mui/material";
-import { Box } from "@mui/system";
-import Link from "next/link";
+import Link from "./link";
 import { ReactNode } from "react";
 import { AppBreadcrumbs } from "./breadcrumbs";
 

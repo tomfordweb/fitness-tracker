@@ -10,9 +10,7 @@ import {
 import { Formik } from "formik";
 import { useState } from "react";
 import { calculateJacksonPollock7Point } from "../../lib/calculators";
-import { jacksonPollock7 } from "../../lib/constant";
 export const SevenPointBodyFatCalculator = () => {
-  const densityMultipliers = jacksonPollock7;
   const [form, setFormValues] = useState({
     gender: "female",
     age: "",

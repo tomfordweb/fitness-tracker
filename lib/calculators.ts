@@ -1,3 +1,30 @@
+export const calculateUsNavyBodyfatCalculatorMale = (props: {
+  abdomen: number;
+  neck: number;
+  height: number;
+}) => {
+  return {
+    bodyFatFormula: `86.01 * log10(${props.abdomen} - ${props.neck}) - 70.041 * log10(${props.height}) + 36.76`,
+    bodyFat:
+      86.01 * Math.log10(props.abdomen - props.neck) -
+      70.041 * Math.log10(props.height) +
+      36.76,
+  };
+};
+export const calculateUsNavyBodyfatCalculatorFemale = (props: {
+  waist: number;
+  hips: number;
+  neck: number;
+  height: number;
+}) => {
+  return {
+    bodyFat:
+      163.205 * Math.log10(props.waist + props.hips - props.neck) -
+      97.684 * Math.log10(props.height) -
+      78.387,
+    bodyFatFormula: `163.205 * log10(${props.waist} + ${props.hips} - ${props.neck}) - 97.684 * log10(${props.height}) - 78.387`,
+  };
+};
 export const calculateJacksonPollock7Point = (props: {
   gender: string;
   age: string;
