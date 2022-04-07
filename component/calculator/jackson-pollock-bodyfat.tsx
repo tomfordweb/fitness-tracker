@@ -9,22 +9,10 @@ import {
 } from "@mui/material";
 import { Formik } from "formik";
 import { useState } from "react";
+import { calculateJacksonPollock7Point } from "../../lib/calculators";
+import { jacksonPollock7 } from "../../lib/constant";
 export const SevenPointBodyFatCalculator = () => {
-  const densityMultipliers = {
-    female: {
-      one: 0.00046971,
-      two: 0.00000056,
-      three: 0.00012828,
-      number: 1.097,
-    },
-    male: {
-      one: 0.00043499,
-      two: 0.00000055,
-      three: 0.00028826,
-      number: 1.112,
-    },
-  };
-
+  const densityMultipliers = jacksonPollock7;
   const [form, setFormValues] = useState({
     gender: "female",
     age: "",
@@ -38,7 +26,9 @@ export const SevenPointBodyFatCalculator = () => {
   });
 
   const [bodyFatPercentage, setBodyFatPercentage] = useState(0);
+  const [bodyFatPercentageFormula, setBodyFatPercentageFormula] = useState("");
   const [bodyDensity, setBodyDensity] = useState(0);
+  const [bodyDensityFormula, setBodyDensityFormula] = useState("");
 
   return (
     <div>
@@ -77,21 +67,12 @@ export const SevenPointBodyFatCalculator = () => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          const { gender, age, ...everythingElse } = values;
-
-          const sumOfSkinfolds = Object.values(everythingElse)
-            .map((val) => parseInt(val))
-            .reduce((a, b) => a + b, 0);
-          const multipliers = densityMultipliers[gender as "male" | "female"];
-
-          const bodyDensity =
-            multipliers.number -
-            multipliers.one * sumOfSkinfolds +
-            multipliers.two * Math.pow(sumOfSkinfolds, 2) -
-            multipliers.three * parseInt(age);
+          const data = calculateJacksonPollock7Point(values);
           setFormValues(values);
-          setBodyDensity(bodyDensity);
-          setBodyFatPercentage(495 / bodyDensity - 450);
+          setBodyDensityFormula(data.bodyDensityFormula);
+          setBodyDensity(data.bodyDensity);
+          setBodyFatPercentageFormula(data.bodyFatFormula);
+          setBodyFatPercentage(data.bodyFat);
           setSubmitting(false);
         }}
       >
@@ -244,7 +225,9 @@ export const SevenPointBodyFatCalculator = () => {
         )}
       </Formik>
       <p>Your body density is: {bodyDensity}</p>
+      <p>{bodyDensityFormula}</p>
       <p>Your body fat percentage is: {bodyFatPercentage}</p>
+      <p>{bodyFatPercentageFormula}</p>
     </div>
   );
 };
