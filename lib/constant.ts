@@ -66,30 +66,14 @@ export const CALCULATORS: {
     category: "Strength",
     groups: [
       {
-        title: "1RM Calculators",
+        title: "Strength Calculators",
         description: "Do you even lift bro?",
-        href: "/bodyfat-calculator",
-        linkText: "Calculate Bodyfat Percentage",
+        href: "",
+        linkText: "Calculate your fitness level",
         calculators: [
           {
-            href: "",
-            linkText: "Back Squat",
-          },
-          {
-            href: "",
-            linkText: "Deadlift",
-          },
-          {
-            href: "",
-            linkText: "Bench Press",
-          },
-          {
-            href: "",
-            linkText: "Bent over Row",
-          },
-          {
-            href: "",
-            linkText: "Overhead Press",
+            href: "/strength-calculators/one-rep-max-calculator",
+            linkText: "One Rep Max Calculator",
           },
         ],
       },

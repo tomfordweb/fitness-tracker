@@ -10,11 +10,10 @@ import {
 import { Formik } from "formik";
 import { useState } from "react";
 import {
-  calculateJacksonPollock7Point,
   calculateUsNavyBodyfatCalculatorFemale,
   calculateUsNavyBodyfatCalculatorMale,
 } from "../../lib/calculators";
-export const UsNavyGirthCalculator = () => {
+export const UsNavyBodyfatCalculator = () => {
   const [form, setFormValues] = useState({
     gender: "female",
     height: "",

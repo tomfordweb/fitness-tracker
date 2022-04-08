@@ -1,5 +1,8 @@
 import { NextPage } from "next";
-import { UsNavyGirthCalculator } from "../../component/calculator/us-navy-girth";
+import {
+  UsNavyBodyfatCalculator,
+  UsNavyGirthCalculator,
+} from "../../component/calculator/us-navy-girth";
 
 const UsNavyGirthCalculatorPage: NextPage = () => {
   return (
@@ -35,7 +38,7 @@ const UsNavyGirthCalculatorPage: NextPage = () => {
           waist at the level of the greatest protrusion of the gluteal muscles.
         </li>
       </ul>
-      <UsNavyGirthCalculator />
+      <UsNavyBodyfatCalculator />
     </div>
   );
 };
