@@ -49,6 +49,22 @@ export const CALCULATORS: {
         calculators: BODYFAT_CALCULATORS,
       },
       {
+        title: "Nutrition",
+        description: "What goes in must come out",
+        href: "",
+        linkText: "",
+        calculators: [
+          {
+            href: "",
+            linkText: "Protein Intake calculator",
+          },
+          {
+            href: "",
+            linkText: "Macro Calculator",
+          },
+        ],
+      },
+      {
         title: "TDEE and BMR Calculators",
         description: "Determine the calories needed to power your body",
         href: "",
@@ -56,7 +72,15 @@ export const CALCULATORS: {
         calculators: [
           {
             href: "",
-            linkText: "Calculate BMR Now",
+            linkText: "Basal Metabolic Rate",
+          },
+          {
+            href: "",
+            linkText: "Resting Metabolic Rate",
+          },
+          {
+            href: "",
+            linkText: "TDEE",
           },
         ],
       },

@@ -25,6 +25,62 @@ export const calculateUsNavyBodyfatCalculatorFemale = (props: {
     bodyFatFormula: `163.205 * log10(${props.waist} + ${props.hips} - ${props.neck}) - 97.684 * log10(${props.height}) - 78.387`,
   };
 };
+
+// mm
+export const calculateJacksonPollock3PointFemale = (props: {
+  chest: string;
+  abdomen: string;
+  thigh: string;
+  age: string;
+}) => {
+  const skinFolds = [props.chest, props.abdomen, props.thigh].map((val) =>
+    parseInt(val)
+  );
+
+  const sumOfSkinfolds = skinFolds.reduce((a, b) => a + b, 0);
+
+  return jacksonPollockBodyfatFromDensity({
+    bodyDensity:
+      1.0994921 -
+      0.0009929 * sumOfSkinfolds +
+      0.0000023 * Math.pow(sumOfSkinfolds, 2) -
+      0.0001392 * parseInt(props.age),
+    bodyDensityFormula: `1.0994921 - 0.0009929 * ( ${skinFolds.join(
+      "+"
+    )} ) + 0.0000023 * ( ${skinFolds.join("+")} ) ^2 - 0.0001392 * ${
+      props.age
+    }`,
+  });
+};
+
+// mm
+export const calculateJacksonPollock3PointMale = (props: {
+  chest: string;
+  abdomen: string;
+  thigh: string;
+  age: string;
+}) => {
+  const skinFolds = [props.chest, props.abdomen, props.thigh].map((val) =>
+    parseInt(val)
+  );
+
+  const sumOfSkinfolds = skinFolds.reduce((a, b) => a + b, 0);
+
+  return jacksonPollockBodyfatFromDensity({
+    bodyDensity:
+      1.10938 -
+      0.0008267 * sumOfSkinfolds +
+      0.0000016 * Math.pow(sumOfSkinfolds, 2) -
+      0.0002574 * parseInt(props.age),
+    bodyDensityFormula: `1.10938 - 0.0008267 * ( ${skinFolds.join(
+      " + "
+    )} ) + 0.0000016 * ( ${skinFolds.join(" + ")} )^2 - 0.0002574 * ${
+      props.age
+    }`,
+  });
+};
+
+// mm
 export const calculateJacksonPollock7Point = (props: {
   gender: string;
   age: string;
@@ -67,12 +123,21 @@ export const calculateJacksonPollock7Point = (props: {
             (${multipliers.one} * (${skinFolds.join("+")})) +
             (${multipliers.two} * (${skinFolds.join("+")})^2) -
             (${multipliers.three} * ${age})`;
-  const bodyFatFormula = `495 / ${bodyDensity} - 450`;
-  const bodyFat = 495 / bodyDensity - 450;
-  return {
+
+  return jacksonPollockBodyfatFromDensity({
     bodyDensity,
     bodyDensityFormula,
+  });
+};
+
+const jacksonPollockBodyfatFromDensity = (props: {
+  bodyDensity: number;
+  bodyDensityFormula: string;
+}) => {
+  const bodyFat = 495 / props.bodyDensity - 450;
+  return {
+    ...props,
     bodyFat,
-    bodyFatFormula,
+    bodyFatFormula: `495 / ( ${props.bodyDensityFormula} ) - 450`,
   };
 };

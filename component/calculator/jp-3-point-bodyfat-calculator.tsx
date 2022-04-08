@@ -9,6 +9,10 @@ import {
 } from "@mui/material";
 import { Formik } from "formik";
 import { useState } from "react";
+import {
+  calculateJacksonPollock3PointFemale,
+  calculateJacksonPollock3PointMale,
+} from "../../lib/calculators";
 export const JacksonPollock3PointBodyfatCalculator = () => {
   const [form, setFormValues] = useState({
     gender: "female",
@@ -63,12 +67,17 @@ export const JacksonPollock3PointBodyfatCalculator = () => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          // const data = calculateJacksonPollock7Point(values);
-          // setFormValues(values);
-          // setBodyDensityFormula(data.bodyDensityFormula);
-          // setBodyDensity(data.bodyDensity);
-          // setBodyFatPercentageFormula(data.bodyFatFormula);
-          // setBodyFatPercentage(data.bodyFat);
+          let data;
+          if (values.gender === "female") {
+            data = calculateJacksonPollock3PointFemale(values);
+          } else {
+            data = calculateJacksonPollock3PointMale(values);
+          }
+          setFormValues(values);
+          setBodyDensityFormula(data.bodyDensityFormula);
+          setBodyDensity(data.bodyDensity);
+          setBodyFatPercentageFormula(data.bodyFatFormula);
+          setBodyFatPercentage(data.bodyFat);
           setSubmitting(false);
         }}
       >
