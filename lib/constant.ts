@@ -2,7 +2,7 @@ import { calculateJacksonPollock7Point } from "./calculators";
 
 export const BODYFAT_CALCULATORS = [
   {
-    href: "",
+    href: "/bodyfat-calculator/jackson-pollock-3-point",
     linkText: "Jackson & Pollock 3 Point Bodyfat Calculator",
   },
   {

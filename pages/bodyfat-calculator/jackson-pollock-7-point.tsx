@@ -1,10 +1,10 @@
 import type { NextPage } from "next";
-import { SevenPointBodyFatCalculator } from "../../component/calculator/jackson-pollock-bodyfat";
+import { JacksonPollock7PointBodyfatCalculator } from "../../component/calculator/jp-7-point-calculator";
 
 const JacksonPollockBodyfatCalculator: NextPage = () => {
   return (
     <div>
-      <SevenPointBodyFatCalculator />
+      <JacksonPollock7PointBodyfatCalculator />
     </div>
   );
 };
