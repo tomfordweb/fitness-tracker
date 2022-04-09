@@ -9,16 +9,17 @@ import {
 } from "@mui/material";
 import { Formik } from "formik";
 import { useState } from "react";
-import { calculateJacksonPollock7Point } from "../../lib/calculators";
-export const SevenPointBodyFatCalculator = () => {
+import {
+  calculateJacksonPollock4Point,
+  calculateJacksonPollock7Point,
+} from "../../lib/calculators";
+
+export const JacksonPollock4PointBodyfatCalculator = () => {
   const [form, setFormValues] = useState({
     gender: "female",
     age: "",
-    chest: "",
-    midaxilar: "",
     tricep: "",
-    subscapular: "",
-    abdominal: "",
+    abdomen: "",
     suprailiac: "",
     thigh: "",
   });
@@ -46,29 +47,18 @@ export const SevenPointBodyFatCalculator = () => {
           if (!values.suprailiac) {
             errors.suprailiac = "Required";
           }
-          if (!values.abdominal) {
-            errors.abdominal = "Required";
-          }
-          if (!values.subscapular) {
-            errors.subscapular = "Required";
+          if (!values.abdomen) {
+            errors.abdomen = "Required";
           }
           if (!values.tricep) {
             errors.tricep = "Required";
-          }
-          if (!values.midaxilar) {
-            errors.midaxilar = "Required";
-          }
-          if (!values.chest) {
-            errors.chest = "Required";
           }
 
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          const data = calculateJacksonPollock7Point(values);
+          const data = calculateJacksonPollock4Point(values);
           setFormValues(values);
-          setBodyDensityFormula(data.bodyDensityFormula);
-          setBodyDensity(data.bodyDensity);
           setBodyFatPercentageFormula(data.bodyFatFormula);
           setBodyFatPercentage(data.bodyFat);
           setSubmitting(false);
@@ -128,30 +118,6 @@ export const SevenPointBodyFatCalculator = () => {
             />
             <TextField
               className="form-control"
-              label="Chest Measurement"
-              id="chest"
-              name="chest"
-              type="number"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.chest}
-              error={touched.chest && Boolean(errors.chest)}
-              helperText={touched.chest && errors.chest}
-            />
-            <TextField
-              className="form-control"
-              label="Mixaxilar Measurement"
-              id="midaxilar"
-              name="midaxilar"
-              type="number"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.midaxilar}
-              error={touched.midaxilar && Boolean(errors.midaxilar)}
-              helperText={touched.midaxilar && errors.midaxilar}
-            />
-            <TextField
-              className="form-control"
               label="Tricep Measurement"
               id="tricep"
               name="tricep"
@@ -163,28 +129,16 @@ export const SevenPointBodyFatCalculator = () => {
               helperText={touched.tricep && errors.tricep}
             />
             <TextField
-              label="Subscapular Measurement"
-              className="form-control"
-              id="subscapular"
-              name="subscapular"
-              type="number"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.subscapular}
-              error={touched.subscapular && Boolean(errors.subscapular)}
-              helperText={touched.subscapular && errors.subscapular}
-            />
-            <TextField
               label="Abdominal Measurement"
-              id="abdominal"
+              id="abdomen"
               className="form-control"
-              name="abdominal"
+              name="abdomen"
               type="number"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.abdominal}
-              error={touched.abdominal && Boolean(errors.abdominal)}
-              helperText={touched.abdominal && errors.abdominal}
+              value={values.abdomen}
+              error={touched.abdomen && Boolean(errors.abdomen)}
+              helperText={touched.abdomen && errors.abdomen}
             />
             <TextField
               className="form-control"
@@ -222,8 +176,6 @@ export const SevenPointBodyFatCalculator = () => {
           </form>
         )}
       </Formik>
-      <p>Your body density is: {bodyDensity}</p>
-      <p>{bodyDensityFormula}</p>
       <p>Your body fat percentage is: {bodyFatPercentage}</p>
       <p>{bodyFatPercentageFormula}</p>
     </div>

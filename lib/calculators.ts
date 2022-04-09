@@ -1,3 +1,47 @@
+export const calculateBasalMetabolicRate = (props: {
+  weightInKilograms: number;
+  heightInCentimeters: number;
+  age: number;
+  gender: string;
+}) => {
+  const multipliers = {
+    male: {
+      number: 88.362,
+      weight: 13.397,
+      height: 4.799,
+      age: 5.677,
+    },
+    female: {
+      number: 447.593,
+      weight: 9.247,
+      height: 3.098,
+      age: 4.33,
+    },
+  };
+
+  const genderNeutralCalculator = (
+    props: { weight: number; height: number; age: number },
+    multipliers: { weight: number; height: number; age: number; number: number }
+  ) => {
+    return {
+      value:
+        multipliers.number +
+        multipliers.weight * props.weight +
+        multipliers.height * props.height -
+        multipliers.age * props.age,
+      formula: `${multipliers.number} + (${multipliers.weight} * ${props.weight} + (${multipliers.height} * ${props.height}) - ( ${props.weight} * ${props.age} )`,
+    };
+  };
+
+  return genderNeutralCalculator(
+    {
+      weight: props.weightInKilograms,
+      height: props.heightInCentimeters,
+      age: props.age,
+    },
+    multipliers[props.gender as "male" | "female"]
+  );
+};
 export const calculateOneRepMax = (props: { weight: number; reps: number }) => {
   const { weight, reps } = props;
 
@@ -93,6 +137,57 @@ export const calculateJacksonPollock3PointFemale = (props: {
       props.age
     }`,
   });
+};
+
+export const calculateJacksonPollock4Point = (props: {
+  gender: string;
+  age: string;
+  tricep: string;
+  abdomen: string;
+  suprailiac: string;
+  thigh: string;
+}) => {
+  const { gender, age } = props;
+
+  const densityMultipliers = {
+    female: {
+      one: 0.29669,
+      two: 0.00043,
+      three: 0.02963,
+      number: 1.4072,
+    },
+    male: {
+      one: 0.29288,
+      two: 0.0005,
+      three: 0.15845,
+      number: 5.76377,
+    },
+  };
+  const multipliers = densityMultipliers[gender as "male" | "female"];
+  const skinFolds = [
+    props.tricep,
+    props.abdomen,
+    props.suprailiac,
+    props.thigh,
+  ].map((val) => parseInt(val));
+
+  const sumOfSkinfolds = skinFolds.reduce((a, b) => a + b, 0);
+
+  const bodyFat =
+    multipliers.one * sumOfSkinfolds -
+    multipliers.two * Math.pow(sumOfSkinfolds, 2) +
+    multipliers.three * parseInt(age) -
+    multipliers.number;
+
+  const bodyFatFormula = `(${multipliers.one} * (${skinFolds.join("+")})) -
+            (${multipliers.two} * (${skinFolds.join("+")})^2) + (${
+    multipliers.three
+  } * ${age}) + ${multipliers.number}`;
+
+  return {
+    bodyFat,
+    bodyFatFormula,
+  };
 };
 
 // mm

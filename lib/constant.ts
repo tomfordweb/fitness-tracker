@@ -6,7 +6,7 @@ export const BODYFAT_CALCULATORS = [
     linkText: "Jackson & Pollock 3 Point Bodyfat Calculator",
   },
   {
-    href: "",
+    href: "/bodyfat-calculator/jackson-pollock-4-point",
     linkText: "Jackson & Pollock 4 Point Bodyfat Calculator",
   },
   {
@@ -17,10 +17,6 @@ export const BODYFAT_CALCULATORS = [
   {
     href: "/bodyfat-calculator/us-navy-girth",
     linkText: "US Navy",
-  },
-  {
-    href: "",
-    linkText: "Waist-to-Hip ratio",
   },
 ];
 export const CALCULATORS: {
@@ -59,28 +55,12 @@ export const CALCULATORS: {
             linkText: "Protein Intake calculator",
           },
           {
-            href: "",
-            linkText: "Macro Calculator",
-          },
-        ],
-      },
-      {
-        title: "TDEE and BMR Calculators",
-        description: "Determine the calories needed to power your body",
-        href: "",
-        linkText: "",
-        calculators: [
-          {
-            href: "",
+            href: "/nutrition-calculators/basal-metabolic-rate",
             linkText: "Basal Metabolic Rate",
           },
           {
-            href: "",
-            linkText: "Resting Metabolic Rate",
-          },
-          {
-            href: "",
-            linkText: "TDEE",
+            href: "/nutrition-calculators/total-daily-energy-expenditure",
+            linkText: "Total Daily Energy Expenditure",
           },
         ],
       },
