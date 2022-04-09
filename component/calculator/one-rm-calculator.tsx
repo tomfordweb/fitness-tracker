@@ -10,20 +10,39 @@ import {
   Typography,
   CardActions,
   Card,
+  Paper,
+  Grid,
 } from "@mui/material";
+import { Box } from "@mui/system";
 import { Formik } from "formik";
 import React, { useState } from "react";
+import { calculateOneRepMax } from "../../lib/calculators";
 
 const OneRmCard = (props: { value: number; formula: string; name: string }) => (
-  <Card>
-    <CardContent>
-      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-        {props.name}
-      </Typography>
-      <Typography variant="body2">{props.value}</Typography>
-      <Typography variant="body1">{props.formula}</Typography>
-    </CardContent>
-  </Card>
+  <Paper
+    sx={{
+      mb: 3,
+      p: 3,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      flexDirection: "column",
+    }}
+  >
+    <Typography variant="h3">
+      {props.value}
+      <Typography variant="overline">Lbs</Typography>
+    </Typography>
+    <Typography
+      sx={{ fontSize: 14 }}
+      variant="overline"
+      color="text.secondary"
+      gutterBottom
+    >
+      {props.name}
+    </Typography>
+    <Typography variant="caption">{props.formula}</Typography>
+  </Paper>
 );
 // source: https://www.athlegan.com/calculate-1rm
 export const OneRmCalculator = () => {
@@ -83,40 +102,7 @@ export const OneRmCalculator = () => {
           const weight = parseInt(values.weight);
           const reps = parseInt(values.reps);
 
-          const oneRms = {
-            brzycki: {
-              value: weight * (36 / (37 - reps)),
-              formula: `${values.weight} * (36 / ( 37 ${values.reps}))`,
-            },
-            oconner: {
-              value: weight * (1 + 0.025 * reps),
-              formula: `${values.weight} * (1. 0.025 + ${values.reps})`,
-            },
-            mayhew: {
-              value: (100 * weight) / (52.2 + 41.9 * (Math.E - 0.055) * reps),
-              formula: `100 * ${values.weight} / (52.2 + (41.9 * ${
-                Math.E - 0.055
-              } * ${values.reps}))`,
-            },
-            lombardi: {
-              value: Math.pow(weight * reps, 0.1),
-              formula: `${values.weight} * ${values.reps} ^ 0.1`,
-            },
-            lander: {
-              value: (100 * weight) / (101.4 - 2.67123 * reps),
-              formula: `(100 * ${weight}) / (101.4 - 2.67123 * ${reps})`,
-            },
-            wathan: {
-              value: (100 * weight) / (46.8 + 53.8 * Math.exp(-0.075) * reps),
-              formula: `(100 * ${weight}) / (46.8 + (53.8 * ${Math.exp(
-                -0.075
-              )}* ${reps}))`,
-            },
-            epley: {
-              value: weight * (1 + 0.0333 * reps),
-              formula: `${weight} * (1 + 0.0333 * ${reps})`,
-            },
-          };
+          const oneRms = calculateOneRepMax({ weight, reps });
           setOneRms(oneRms);
         }}
       >
@@ -172,13 +158,29 @@ export const OneRmCalculator = () => {
           </form>
         )}
       </Formik>
-      <OneRmCard {...oneRms.brzycki} name="Brzycki" />
-      <OneRmCard {...oneRms.epley} name="Epley" />
-      <OneRmCard {...oneRms.lander} name="Lander" />
-      <OneRmCard {...oneRms.mayhew} name="Mayhew" />
-      <OneRmCard {...oneRms.wathan} name="Wathan" />
-      <OneRmCard {...oneRms.oconner} name="O'Connor" />
-      <OneRmCard {...oneRms.lombardi} name="Lombardi" />
+      <Grid sx={{ mt: 3 }} container spacing={2}>
+        <Grid item xs={3}>
+          <OneRmCard {...oneRms.brzycki} name="Brzycki" />
+        </Grid>
+        <Grid item xs={3}>
+          <OneRmCard {...oneRms.epley} name="Epley" />
+        </Grid>
+        <Grid item xs={3}>
+          <OneRmCard {...oneRms.lander} name="Lander" />
+        </Grid>
+        <Grid item xs={3}>
+          <OneRmCard {...oneRms.mayhew} name="Mayhew" />
+        </Grid>
+        <Grid item xs={3}>
+          <OneRmCard {...oneRms.wathan} name="Wathan" />
+        </Grid>
+        <Grid item xs={3}>
+          <OneRmCard {...oneRms.oconner} name="O'Connor" />
+        </Grid>
+        <Grid item xs={3}>
+          <OneRmCard {...oneRms.lombardi} name="Lombardi" />
+        </Grid>
+      </Grid>
     </div>
   );
 };

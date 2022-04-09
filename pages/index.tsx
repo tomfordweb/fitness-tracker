@@ -14,11 +14,11 @@ const Home: NextPage = () => {
   return (
     <section>
       <header>
-        <Typography variant="h1">
-          The best fitness calculators online
+        <Typography component="h1" variant="h3">
+          The Best Fitness Calculators Online
         </Typography>
-        <Typography>
-          Browse our selection of fitness and health calculators
+        <Typography variant="subtitle1">
+          Browse Our Selection Of Fitness, Health and Nutrition calculators
         </Typography>
       </header>
       <article>
