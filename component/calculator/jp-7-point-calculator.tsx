@@ -10,6 +10,7 @@ import {
 import { Formik } from "formik";
 import { useState } from "react";
 import { calculateJacksonPollock7Point } from "../../lib/calculators";
+import { GenderRadioOptions } from "./gender-radio-options";
 export const SevenPointBodyFatCalculator = () => {
   const [form, setFormValues] = useState({
     gender: "female",
@@ -91,33 +92,15 @@ export const SevenPointBodyFatCalculator = () => {
               flexDirection: "column",
             }}
           >
-            <FormControl className="form-control">
-              <FormLabel id="demo-row-radio-buttons-group-label">
-                Gender
-              </FormLabel>
-              <RadioGroup
-                row
-                onChange={handleChange}
-                value={values.gender}
-                aria-labelledby="demo-row-radio-buttons-group-label"
-                name="gender"
-              >
-                <FormControlLabel
-                  value="female"
-                  control={<Radio />}
-                  label="Female"
-                />
-                <FormControlLabel
-                  value="male"
-                  control={<Radio />}
-                  label="Male"
-                />
-              </RadioGroup>
-            </FormControl>
+            <GenderRadioOptions
+              handleChange={handleChange}
+              value={values.gender}
+            />
             <TextField
               className="form-control"
               label="Age"
               id="age"
+              InputProps={{ inputProps: { min: 1 } }}
               name="age"
               type="number"
               onChange={handleChange}
@@ -128,34 +111,11 @@ export const SevenPointBodyFatCalculator = () => {
             />
             <TextField
               className="form-control"
-              label="Chest Measurement"
-              id="chest"
-              name="chest"
-              type="number"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.chest}
-              error={touched.chest && Boolean(errors.chest)}
-              helperText={touched.chest && errors.chest}
-            />
-            <TextField
-              className="form-control"
-              label="Mixaxilar Measurement"
-              id="midaxilar"
-              name="midaxilar"
-              type="number"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.midaxilar}
-              error={touched.midaxilar && Boolean(errors.midaxilar)}
-              helperText={touched.midaxilar && errors.midaxilar}
-            />
-            <TextField
-              className="form-control"
               label="Tricep Measurement"
               id="tricep"
               name="tricep"
               type="number"
+              InputProps={{ inputProps: { min: 1 } }}
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.tricep}
@@ -163,9 +123,23 @@ export const SevenPointBodyFatCalculator = () => {
               helperText={touched.tricep && errors.tricep}
             />
             <TextField
+              className="form-control"
+              label="Chest Measurement"
+              id="chest"
+              name="chest"
+              type="number"
+              InputProps={{ inputProps: { min: 1 } }}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.chest}
+              error={touched.chest && Boolean(errors.chest)}
+              helperText={touched.chest && errors.chest}
+            />
+            <TextField
               label="Subscapular Measurement"
               className="form-control"
               id="subscapular"
+              InputProps={{ inputProps: { min: 1 } }}
               name="subscapular"
               type="number"
               onChange={handleChange}
@@ -175,11 +149,25 @@ export const SevenPointBodyFatCalculator = () => {
               helperText={touched.subscapular && errors.subscapular}
             />
             <TextField
+              className="form-control"
+              label="Mixaxilar Measurement"
+              id="midaxilar"
+              name="midaxilar"
+              InputProps={{ inputProps: { min: 1 } }}
+              type="number"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.midaxilar}
+              error={touched.midaxilar && Boolean(errors.midaxilar)}
+              helperText={touched.midaxilar && errors.midaxilar}
+            />
+            <TextField
               label="Abdominal Measurement"
               id="abdominal"
               className="form-control"
               name="abdominal"
               type="number"
+              InputProps={{ inputProps: { min: 1 } }}
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.abdominal}
@@ -192,6 +180,7 @@ export const SevenPointBodyFatCalculator = () => {
               id="suprailiac"
               name="suprailiac"
               type="number"
+              InputProps={{ inputProps: { min: 1 } }}
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.suprailiac}
@@ -204,6 +193,7 @@ export const SevenPointBodyFatCalculator = () => {
               id="thigh"
               name="thigh"
               type="number"
+              InputProps={{ inputProps: { min: 1 } }}
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.thigh}

@@ -22,13 +22,19 @@ const Home: NextPage = () => {
         </Typography>
       </header>
       <article>
+        <p>
+          Monitoring your fitness is essential to living a healthy and happy
+          life. Use our efficient calculators to track and monitor your fitness.
+        </p>
+      </article>
+      <article>
         {cards.map((section) => (
           <>
             <Typography variant="h2" color="text.secondary">
               {section.category}
             </Typography>
-            {section.groups.map((card) => (
-              <Card variant="outlined" sx={{ mb: 3 }}>
+            {section.groups.map((card, i) => (
+              <Card key={i} variant="outlined" sx={{ mb: 3 }}>
                 <CardContent>
                   <Typography variant="h5">
                     <Link href={card.href}>{card.title}</Link>
@@ -37,8 +43,9 @@ const Home: NextPage = () => {
                     {card.description}
                   </Typography>
                   <CardActions>
-                    {card.calculators.map((link) => (
+                    {card.calculators.map((link, i) => (
                       <Chip
+                        key={i}
                         component={Link}
                         clickable
                         label={link.linkText}
