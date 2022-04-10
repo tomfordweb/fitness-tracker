@@ -16,7 +16,7 @@ export const SevenPointBodyFatCalculator = () => {
     gender: "female",
     age: "",
     chest: "",
-    midaxilar: "",
+    midauxilary: "",
     tricep: "",
     subscapular: "",
     abdominal: "",
@@ -56,8 +56,8 @@ export const SevenPointBodyFatCalculator = () => {
           if (!values.tricep) {
             errors.tricep = "Required";
           }
-          if (!values.midaxilar) {
-            errors.midaxilar = "Required";
+          if (!values.midauxilary) {
+            errors.midauxilary = "Required";
           }
           if (!values.chest) {
             errors.chest = "Required";
@@ -150,16 +150,16 @@ export const SevenPointBodyFatCalculator = () => {
             />
             <TextField
               className="form-control"
-              label="Mixaxilar Measurement"
-              id="midaxilar"
-              name="midaxilar"
+              label="Midauxilary Measurement"
+              id="midauxilary"
+              name="midauxilary"
               InputProps={{ inputProps: { min: 1 } }}
               type="number"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.midaxilar}
-              error={touched.midaxilar && Boolean(errors.midaxilar)}
-              helperText={touched.midaxilar && errors.midaxilar}
+              value={values.midauxilary}
+              error={touched.midauxilary && Boolean(errors.midauxilary)}
+              helperText={touched.midauxilary && errors.midauxilary}
             />
             <TextField
               label="Abdominal Measurement"

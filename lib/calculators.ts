@@ -222,7 +222,7 @@ export const calculateJacksonPollock7Point = (props: {
   gender: string;
   age: string;
   chest: string;
-  midaxilar: string;
+  midauxilary: string;
   tricep: string;
   subscapular: string;
   abdominal: string;
