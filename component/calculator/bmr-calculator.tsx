@@ -14,6 +14,7 @@ import {
   calculateJacksonPollock3PointFemale,
   calculateJacksonPollock3PointMale,
 } from "../../lib/calculators";
+import { GenderRadioOptions } from "./gender-radio-options";
 export const BasalMetabolicRateCalculator = () => {
   const [form, setFormValues] = useState({
     gender: "female",
@@ -67,29 +68,10 @@ export const BasalMetabolicRateCalculator = () => {
               flexDirection: "column",
             }}
           >
-            <FormControl className="form-control">
-              <FormLabel id="demo-row-radio-buttons-group-label">
-                Gender
-              </FormLabel>
-              <RadioGroup
-                row
-                onChange={handleChange}
-                value={values.gender}
-                aria-labelledby="demo-row-radio-buttons-group-label"
-                name="gender"
-              >
-                <FormControlLabel
-                  value="female"
-                  control={<Radio />}
-                  label="Female"
-                />
-                <FormControlLabel
-                  value="male"
-                  control={<Radio />}
-                  label="Male"
-                />
-              </RadioGroup>
-            </FormControl>
+            <GenderRadioOptions
+              handleChange={handleChange}
+              value={values.gender}
+            />
             <TextField
               className="form-control"
               label="Age"

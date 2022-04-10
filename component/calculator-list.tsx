@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import Link from "./link";
 
 export const CalculatorList = (props: {
@@ -10,7 +11,9 @@ export const CalculatorList = (props: {
     <ul>
       {props.calculators.map((calculator) => (
         <li>
-          <Link href={calculator.href}>{calculator.linkText}</Link>
+          <Typography>
+            <Link href={calculator.href}>{calculator.linkText}</Link>
+          </Typography>
         </li>
       ))}
     </ul>

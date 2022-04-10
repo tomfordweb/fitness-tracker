@@ -1,14 +1,15 @@
+import { Container } from "@mui/material";
 import type { NextPage } from "next";
 import { BodyfatMeasurementDescription } from "../../component/bodyfat-measurement-description";
 import { SevenPointBodyFatCalculator } from "../../component/calculator/jp-7-point-calculator";
+import { PageTitle } from "../../component/page-title";
 
 const JacksonPollockBodyfatCalculator: NextPage = () => {
   return (
-    <section>
-      <article>
+    <>
+      <PageTitle h1="Jackson & Pollock 7 Point Bodyfat Calculator" />
+      <Container>
         <SevenPointBodyFatCalculator />
-      </article>
-      <article>
         <BodyfatMeasurementDescription
           fields={{
             chest: true,
@@ -20,8 +21,8 @@ const JacksonPollockBodyfatCalculator: NextPage = () => {
             thigh: true,
           }}
         />
-      </article>
-    </section>
+      </Container>
+    </>
   );
 };
 

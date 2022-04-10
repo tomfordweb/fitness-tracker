@@ -1,19 +1,4 @@
-import {
-  Radio,
-  TextField,
-  Button,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
-  CardContent,
-  Typography,
-  CardActions,
-  Card,
-  Paper,
-  Grid,
-} from "@mui/material";
-import { Box } from "@mui/system";
+import { TextField, Button, Typography, Paper, Grid } from "@mui/material";
 import { Formik } from "formik";
 import React, { useState } from "react";
 import { calculateOneRepMax } from "../../lib/calculators";

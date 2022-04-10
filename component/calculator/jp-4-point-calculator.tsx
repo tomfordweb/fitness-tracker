@@ -9,10 +9,8 @@ import {
 } from "@mui/material";
 import { Formik } from "formik";
 import { useState } from "react";
-import {
-  calculateJacksonPollock4Point,
-  calculateJacksonPollock7Point,
-} from "../../lib/calculators";
+import { calculateJacksonPollock4Point } from "../../lib/calculators";
+import { GenderRadioOptions } from "./gender-radio-options";
 
 export const JacksonPollock4PointBodyfatCalculator = () => {
   const [form, setFormValues] = useState({
@@ -26,8 +24,6 @@ export const JacksonPollock4PointBodyfatCalculator = () => {
 
   const [bodyFatPercentage, setBodyFatPercentage] = useState(0);
   const [bodyFatPercentageFormula, setBodyFatPercentageFormula] = useState("");
-  const [bodyDensity, setBodyDensity] = useState(0);
-  const [bodyDensityFormula, setBodyDensityFormula] = useState("");
 
   return (
     <div>
@@ -81,29 +77,10 @@ export const JacksonPollock4PointBodyfatCalculator = () => {
               flexDirection: "column",
             }}
           >
-            <FormControl className="form-control">
-              <FormLabel id="demo-row-radio-buttons-group-label">
-                Gender
-              </FormLabel>
-              <RadioGroup
-                row
-                onChange={handleChange}
-                value={values.gender}
-                aria-labelledby="demo-row-radio-buttons-group-label"
-                name="gender"
-              >
-                <FormControlLabel
-                  value="female"
-                  control={<Radio />}
-                  label="Female"
-                />
-                <FormControlLabel
-                  value="male"
-                  control={<Radio />}
-                  label="Male"
-                />
-              </RadioGroup>
-            </FormControl>
+            <GenderRadioOptions
+              handleChange={handleChange}
+              value={values.gender}
+            />
             <TextField
               className="form-control"
               label="Age"
