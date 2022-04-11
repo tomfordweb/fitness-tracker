@@ -1,5 +1,5 @@
 import { Button, TextField } from "@mui/material";
-import { FormikErrors, FormikTouched, FormikValues } from "formik";
+import { FormikErrors, FormikTouched } from "formik";
 import { ChangeEvent } from "react";
 import { GenderRadioOptions } from "./gender-radio-options";
 
