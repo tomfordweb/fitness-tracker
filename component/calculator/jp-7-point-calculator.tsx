@@ -1,8 +1,7 @@
-import { TextField, Button } from "@mui/material";
 import { Formik } from "formik";
 import { useState } from "react";
 import { calculateJacksonPollock7Point } from "../../lib/calculators";
-import { GenderRadioOptions } from "./gender-radio-options";
+import { SharedJpBodyfatControls } from "./shared-jp-bodyfat-controls";
 export const SevenPointBodyFatCalculator = () => {
   const [form, setFormValues] = useState({
     gender: "female",
@@ -84,123 +83,14 @@ export const SevenPointBodyFatCalculator = () => {
               flexDirection: "column",
             }}
           >
-            <GenderRadioOptions
+            <SharedJpBodyfatControls
               handleChange={handleChange}
-              value={values.gender}
+              handleBlur={handleBlur}
+              isSubmitting={isSubmitting}
+              values={values}
+              touched={touched}
+              errors={errors}
             />
-            <TextField
-              className="form-control"
-              label="Age"
-              id="age"
-              InputProps={{ inputProps: { min: 1 } }}
-              name="age"
-              type="number"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.age}
-              error={touched.age && Boolean(errors.age)}
-              helperText={touched.age && errors.age}
-            />
-            <TextField
-              className="form-control"
-              label="Tricep Measurement"
-              id="tricep"
-              name="tricep"
-              type="number"
-              InputProps={{ inputProps: { min: 1 } }}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.tricep}
-              error={touched.tricep && Boolean(errors.tricep)}
-              helperText={touched.tricep && errors.tricep}
-            />
-            <TextField
-              className="form-control"
-              label="Chest Measurement"
-              id="chest"
-              name="chest"
-              type="number"
-              InputProps={{ inputProps: { min: 1 } }}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.chest}
-              error={touched.chest && Boolean(errors.chest)}
-              helperText={touched.chest && errors.chest}
-            />
-            <TextField
-              label="Subscapular Measurement"
-              className="form-control"
-              id="subscapular"
-              InputProps={{ inputProps: { min: 1 } }}
-              name="subscapular"
-              type="number"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.subscapular}
-              error={touched.subscapular && Boolean(errors.subscapular)}
-              helperText={touched.subscapular && errors.subscapular}
-            />
-            <TextField
-              className="form-control"
-              label="Midauxilary Measurement"
-              id="midauxilary"
-              name="midauxilary"
-              InputProps={{ inputProps: { min: 1 } }}
-              type="number"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.midauxilary}
-              error={touched.midauxilary && Boolean(errors.midauxilary)}
-              helperText={touched.midauxilary && errors.midauxilary}
-            />
-            <TextField
-              label="Abdominal Measurement"
-              id="abdominal"
-              className="form-control"
-              name="abdominal"
-              type="number"
-              InputProps={{ inputProps: { min: 1 } }}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.abdominal}
-              error={touched.abdominal && Boolean(errors.abdominal)}
-              helperText={touched.abdominal && errors.abdominal}
-            />
-            <TextField
-              className="form-control"
-              label="Suprailiac Measurement"
-              id="suprailiac"
-              name="suprailiac"
-              type="number"
-              InputProps={{ inputProps: { min: 1 } }}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.suprailiac}
-              error={touched.suprailiac && Boolean(errors.suprailiac)}
-              helperText={touched.suprailiac && errors.suprailiac}
-            />
-            <TextField
-              className="form-control"
-              label="Thigh Measurement"
-              id="thigh"
-              name="thigh"
-              type="number"
-              InputProps={{ inputProps: { min: 1 } }}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.thigh}
-              error={touched.thigh && Boolean(errors.thigh)}
-              helperText={touched.thigh && errors.thigh}
-            />
-
-            <Button
-              variant="outlined"
-              type="submit"
-              fullWidth
-              disabled={isSubmitting}
-            >
-              Submit
-            </Button>
           </form>
         )}
       </Formik>

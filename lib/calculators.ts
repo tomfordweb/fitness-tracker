@@ -115,11 +115,11 @@ export const calculateUsNavyBodyfatCalculatorFemale = (props: {
 // mm
 export const calculateJacksonPollock3PointFemale = (props: {
   chest: string;
-  abdomen: string;
+  abdominal: string;
   thigh: string;
   age: string;
 }) => {
-  const skinFolds = [props.chest, props.abdomen, props.thigh].map((val) =>
+  const skinFolds = [props.chest, props.abdominal, props.thigh].map((val) =>
     parseInt(val)
   );
 
@@ -193,11 +193,11 @@ export const calculateJacksonPollock4Point = (props: {
 // mm
 export const calculateJacksonPollock3PointMale = (props: {
   chest: string;
-  abdomen: string;
+  abdominal: string;
   thigh: string;
   age: string;
 }) => {
-  const skinFolds = [props.chest, props.abdomen, props.thigh].map((val) =>
+  const skinFolds = [props.chest, props.abdominal, props.thigh].map((val) =>
     parseInt(val)
   );
 

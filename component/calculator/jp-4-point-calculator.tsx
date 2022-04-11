@@ -1,16 +1,7 @@
-import {
-  Radio,
-  TextField,
-  Button,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
-} from "@mui/material";
 import { Formik } from "formik";
 import { useState } from "react";
 import { calculateJacksonPollock4Point } from "../../lib/calculators";
-import { GenderRadioOptions } from "./gender-radio-options";
+import { SharedJpBodyfatControls } from "./shared-jp-bodyfat-controls";
 
 export const JacksonPollock4PointBodyfatCalculator = () => {
   const [form, setFormValues] = useState({
@@ -77,79 +68,14 @@ export const JacksonPollock4PointBodyfatCalculator = () => {
               flexDirection: "column",
             }}
           >
-            <GenderRadioOptions
+            <SharedJpBodyfatControls
               handleChange={handleChange}
-              value={values.gender}
+              handleBlur={handleBlur}
+              isSubmitting={isSubmitting}
+              values={values}
+              touched={touched}
+              errors={errors}
             />
-            <TextField
-              className="form-control"
-              label="Age"
-              id="age"
-              name="age"
-              type="number"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.age}
-              error={touched.age && Boolean(errors.age)}
-              helperText={touched.age && errors.age}
-            />
-            <TextField
-              className="form-control"
-              label="Tricep Measurement"
-              id="tricep"
-              name="tricep"
-              type="number"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.tricep}
-              error={touched.tricep && Boolean(errors.tricep)}
-              helperText={touched.tricep && errors.tricep}
-            />
-            <TextField
-              label="Abdominal Measurement"
-              id="abdomen"
-              className="form-control"
-              name="abdomen"
-              type="number"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.abdomen}
-              error={touched.abdomen && Boolean(errors.abdomen)}
-              helperText={touched.abdomen && errors.abdomen}
-            />
-            <TextField
-              className="form-control"
-              label="Suprailiac Measurement"
-              id="suprailiac"
-              name="suprailiac"
-              type="number"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.suprailiac}
-              error={touched.suprailiac && Boolean(errors.suprailiac)}
-              helperText={touched.suprailiac && errors.suprailiac}
-            />
-            <TextField
-              className="form-control"
-              label="Thigh Measurement"
-              id="thigh"
-              name="thigh"
-              type="number"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.thigh}
-              error={touched.thigh && Boolean(errors.thigh)}
-              helperText={touched.thigh && errors.thigh}
-            />
-
-            <Button
-              variant="outlined"
-              type="submit"
-              fullWidth
-              disabled={isSubmitting}
-            >
-              Submit
-            </Button>
           </form>
         )}
       </Formik>
