@@ -1,19 +1,7 @@
-import {
-  Radio,
-  TextField,
-  Button,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
-} from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import { Formik } from "formik";
 import { useState } from "react";
-import {
-  calculateBasalMetabolicRate,
-  calculateJacksonPollock3PointFemale,
-  calculateJacksonPollock3PointMale,
-} from "../../lib/calculators";
+import { calculateBasalMetabolicRate } from "../../lib/calculators";
 import { GenderRadioOptions } from "./gender-radio-options";
 export const BasalMetabolicRateCalculator = () => {
   const [form, setFormValues] = useState({
@@ -73,6 +61,7 @@ export const BasalMetabolicRateCalculator = () => {
               value={values.gender}
             />
             <TextField
+              sx={{ mb: 3 }}
               className="form-control"
               label="Age"
               id="age"
@@ -85,6 +74,7 @@ export const BasalMetabolicRateCalculator = () => {
               helperText={touched.age && errors.age}
             />
             <TextField
+              sx={{ mb: 3 }}
               className="form-control"
               label="Weight"
               id="weight"
@@ -97,6 +87,7 @@ export const BasalMetabolicRateCalculator = () => {
               helperText={touched.weight && errors.weight}
             />
             <TextField
+              sx={{ mb: 3 }}
               className="form-control"
               label="Height"
               id="heightInCentimeters"

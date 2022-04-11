@@ -11,7 +11,7 @@ export const GenderRadioOptions = (props: {
   value: string;
 }) => {
   return (
-    <FormControl className="form-control">
+    <FormControl sx={{ mb: 3 }} className="form-control">
       <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel>
       <RadioGroup
         row

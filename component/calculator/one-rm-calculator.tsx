@@ -108,30 +108,38 @@ export const OneRmCalculator = () => {
               flexDirection: "column",
             }}
           >
-            <TextField
-              className="form-control"
-              label="Weight"
-              id="weight"
-              name="weight"
-              type="number"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.weight}
-              error={touched.weight && Boolean(errors.weight)}
-              helperText={touched.weight && errors.weight}
-            />
-            <TextField
-              className="form-control"
-              label="Reps"
-              id="reps"
-              name="reps"
-              type="number"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.reps}
-              error={touched.reps && Boolean(errors.reps)}
-              helperText={touched.reps && errors.reps}
-            />
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <TextField
+                  className="form-control"
+                  label="Weight"
+                  sx={{ mb: 3, width: "100%" }}
+                  id="weight"
+                  name="weight"
+                  type="number"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.weight}
+                  error={touched.weight && Boolean(errors.weight)}
+                  helperText={touched.weight && errors.weight}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  className="form-control"
+                  label="Reps"
+                  sx={{ mb: 3, width: "100%" }}
+                  id="reps"
+                  name="reps"
+                  type="number"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.reps}
+                  error={touched.reps && Boolean(errors.reps)}
+                  helperText={touched.reps && errors.reps}
+                />
+              </Grid>
+            </Grid>
             <Button
               variant="outlined"
               type="submit"

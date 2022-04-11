@@ -38,7 +38,11 @@ const Home: NextPage = () => {
                 <Card key={i} variant="outlined" sx={{ mb: 3 }}>
                   <CardContent>
                     <Typography variant="h5">
-                      <Link href={card.href}>{card.title}</Link>
+                      {card.href.length > 0 ? (
+                        <Link href={card.href}>{card.title}</Link>
+                      ) : (
+                        card.title
+                      )}
                     </Typography>
                     <Typography color="text.secondary">
                       {card.description}

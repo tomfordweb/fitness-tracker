@@ -6,14 +6,12 @@ import {
   FormLabel,
   RadioGroup,
   FormControlLabel,
+  Grid,
 } from "@mui/material";
+import Link from "../link";
 import { Formik } from "formik";
 import { useState } from "react";
-import {
-  calculateBasalMetabolicRate,
-  calculateJacksonPollock3PointFemale,
-  calculateJacksonPollock3PointMale,
-} from "../../lib/calculators";
+import { Box } from "@mui/system";
 export const TdeeCalculator = () => {
   const [form, setFormValues] = useState({
     activityLevel: "",
@@ -59,12 +57,11 @@ export const TdeeCalculator = () => {
               flexDirection: "column",
             }}
           >
-            <FormControl className="form-control">
+            <FormControl sx={{ mb: 3 }} className="form-control">
               <FormLabel id="demo-row-radio-buttons-group-label">
                 Activity Level
               </FormLabel>
               <RadioGroup
-                row
                 onChange={handleChange}
                 value={values.activityLevel}
                 aria-labelledby="demo-row-radio-buttons-group-label"
@@ -97,18 +94,33 @@ export const TdeeCalculator = () => {
                 />
               </RadioGroup>
             </FormControl>
-            <TextField
-              className="form-control"
-              label="Basal Metabolic Rate"
-              id="bmr"
-              name="bmr"
-              type="number"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.bmr}
-              error={touched.bmr && Boolean(errors.bmr)}
-              helperText={touched.bmr && errors.bmr}
-            />
+            <Box
+              sx={{
+                display: "flex",
+                mb: 3,
+                alignItems: "center",
+              }}
+            >
+              <Box sx={{ flexGrow: 1, mr: 3 }}>
+                <TextField
+                  sx={{ width: "100%", m: 0 }}
+                  className="form-control"
+                  label="Basal Metabolic Rate"
+                  InputProps={{ inputProps: { min: 1 } }}
+                  id="bmr"
+                  name="bmr"
+                  type="number"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.bmr}
+                  error={touched.bmr && Boolean(errors.bmr)}
+                  helperText={touched.bmr && errors.bmr}
+                />
+              </Box>
+              <Link href="/nutrition-calculators/basal-metabolic-rate">
+                How do I calculate my BMR?
+              </Link>
+            </Box>
             <Button
               variant="outlined"
               type="submit"
