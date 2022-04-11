@@ -1,12 +1,24 @@
+import {
+  Radio,
+  TextField,
+  Button,
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  FormControlLabel,
+} from "@mui/material";
 import { Formik } from "formik";
 import { useState } from "react";
 import { calculateJacksonPollock4Point } from "../../lib/calculators";
+import { GenderRadioOptions } from "./gender-radio-options";
 import { SharedJpBodyfatControls } from "./shared-jp-bodyfat-controls";
 
 export const JacksonPollock4PointBodyfatCalculator = () => {
   const [form, setFormValues] = useState({
+    style: "4point",
     gender: "female",
     age: "",
+
     tricep: "",
     abdomen: "",
     suprailiac: "",

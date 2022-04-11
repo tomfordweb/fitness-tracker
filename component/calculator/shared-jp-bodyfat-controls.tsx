@@ -4,7 +4,7 @@ import { ChangeEvent } from "react";
 import { GenderRadioOptions } from "./gender-radio-options";
 
 interface Form {
-  style?: string | "3point";
+  style?: string | "3point" | "4point";
   gender: string | "male" | "female";
   age: string;
   thigh: string;
@@ -61,23 +61,24 @@ export const SharedJpBodyfatControls = (props: {
           helperText={props.touched.tricep && props.errors.tricep}
         />
       )}
-      {(props.values?.style !== "3point" || props.values.gender === "male") && (
-        <TextField
-          className="form-control"
-          label="Chest Measurement"
-          id="chest"
-          name="chest"
-          sx={{ mb: 3 }}
-          type="number"
-          InputProps={{ inputProps: { min: 1 } }}
-          onChange={props.handleChange}
-          onBlur={props.handleBlur}
-          value={props.values.chest}
-          error={props.touched.chest && Boolean(props.errors.chest)}
-          helperText={props.touched.chest && props.errors.chest}
-        />
-      )}
-      {props.values?.style !== "3point" && (
+      {(props.values?.style !== "3point" || props.values.gender === "male") &&
+        props.values?.style !== "4point" && (
+          <TextField
+            className="form-control"
+            label="Chest Measurement"
+            id="chest"
+            name="chest"
+            sx={{ mb: 3 }}
+            type="number"
+            InputProps={{ inputProps: { min: 1 } }}
+            onChange={props.handleChange}
+            onBlur={props.handleBlur}
+            value={props.values.chest}
+            error={props.touched.chest && Boolean(props.errors.chest)}
+            helperText={props.touched.chest && props.errors.chest}
+          />
+        )}
+      {props.values?.style !== "3point" && props.values?.style !== "4point" && (
         <>
           <TextField
             label="Subscapular Measurement"
