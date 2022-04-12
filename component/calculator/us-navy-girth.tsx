@@ -6,15 +6,14 @@ import {
   FormLabel,
   RadioGroup,
   FormControlLabel,
+  Alert,
 } from "@mui/material";
 import { Formik } from "formik";
 import { useState } from "react";
-import {
-  calculateUsNavyBodyfatCalculatorFemale,
-  calculateUsNavyBodyfatCalculatorMale,
-} from "../../lib/calculators";
+import { BASE_URL } from "../../lib/constant";
 import { GenderRadioOptions } from "./gender-radio-options";
 export const UsNavyBodyfatCalculator = () => {
+  const [formError, setFormError] = useState("");
   const [form, setFormValues] = useState({
     gender: "female",
     height: "",
@@ -59,24 +58,42 @@ export const UsNavyBodyfatCalculator = () => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          const data =
-            values.gender === "female"
-              ? calculateUsNavyBodyfatCalculatorFemale({
-                  waist: parseInt(values.waist),
-                  hips: parseInt(values.hips),
-                  neck: parseInt(values.neck),
-                  height: parseInt(values.height),
-                })
-              : calculateUsNavyBodyfatCalculatorMale({
-                  abdomen: parseInt(values.abdomen),
-                  neck: parseInt(values.neck),
-                  height: parseInt(values.height),
-                });
+          let url: URL;
+          let submissionValues: Record<string, string>;
+          if (values.gender === "female") {
+            url = new URL(BASE_URL + "/api/calculator/navy-bodyfat-female");
+            submissionValues = {
+              waist: values.waist,
+              hips: values.hips,
+              neck: values.neck,
+              height: values.height,
+            };
+          } else {
+            url = new URL(BASE_URL + "/api/calculator/navy-bodyfat-male");
+            submissionValues = {
+              abdomen: values.abdomen,
+              neck: values.neck,
+              height: values.height,
+            };
+          }
 
-          setFormValues(values);
-          setBodyFatPercentageFormula(data.bodyFatFormula);
-          setBodyFatPercentage(data.bodyFat);
-          setSubmitting(false);
+          url.search = new URLSearchParams(submissionValues).toString();
+
+          setFormError("");
+          fetch(url.toString())
+            .then((data) => data.json())
+            .then((data) => {
+              setSubmitting(false);
+              if (data.ok === false) {
+                setFormError("An API Error Occured.");
+                return;
+              }
+              setBodyFatPercentageFormula(data.bodyFatFormula);
+              setBodyFatPercentage(data.bodyFat);
+            })
+            .catch((error) => {
+              setSubmitting(false);
+            });
         }}
       >
         {({
@@ -188,6 +205,11 @@ export const UsNavyBodyfatCalculator = () => {
             >
               Submit
             </Button>
+            {Boolean(formError.length) && (
+              <Alert sx={{ mt: 3 }} severity="error">
+                {formError}
+              </Alert>
+            )}
           </form>
         )}
       </Formik>
