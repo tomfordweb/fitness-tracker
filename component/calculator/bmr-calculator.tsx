@@ -1,9 +1,11 @@
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Alert } from "@mui/material";
 import { Formik } from "formik";
 import { useState } from "react";
 import { calculateBasalMetabolicRate } from "../../lib/calculators";
+import { BASE_URL } from "../../lib/constant";
 import { GenderRadioOptions } from "./gender-radio-options";
 export const BasalMetabolicRateCalculator = () => {
+  const [formError, setFormError] = useState("");
   const [form, setFormValues] = useState({
     gender: "female",
     age: "",
@@ -25,18 +27,38 @@ export const BasalMetabolicRateCalculator = () => {
           if (!values.age) {
             errors.age = "Required";
           }
+          if (!values.gender) {
+            errors.gender = "Required";
+          }
+          if (!values.height) {
+            errors.height = "Required";
+          }
+          if (!values.weight) {
+            errors.weight = "Required";
+          }
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          const data = calculateBasalMetabolicRate({
-            gender: values.gender,
-            age: parseInt(values.age),
-            heightInCentimeters: parseInt(values.height),
-            weightInKilograms: parseInt(values.weight),
-          });
-          setFormValues(values);
-          setBmr(data);
-          setSubmitting(false);
+          const url = new URL(
+            BASE_URL + "/api/calculator/basal-metabolic-rate"
+          );
+
+          setFormError("");
+          url.search = new URLSearchParams(values).toString();
+          fetch(url.toString())
+            .then((data) => data.json())
+            .then((data) => {
+              console.log(data);
+              if (data.ok === false) {
+                setFormError("An API Error Occured.");
+                return;
+              }
+              setBmr(data);
+              setSubmitting(false);
+            })
+            .catch((error) => {
+              setSubmitting(false);
+            });
         }}
       >
         {({
@@ -107,6 +129,11 @@ export const BasalMetabolicRateCalculator = () => {
             >
               Submit
             </Button>
+            {Boolean(formError.length) && (
+              <Alert sx={{ mt: 3 }} severity="error">
+                {formError}
+              </Alert>
+            )}
           </form>
         )}
       </Formik>

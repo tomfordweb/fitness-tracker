@@ -1,47 +1,10 @@
-export const calculateBasalMetabolicRate = (props: {
-  weightInKilograms: number;
-  heightInCentimeters: number;
-  age: number;
-  gender: string;
-}) => {
-  const multipliers = {
-    male: {
-      number: 88.362,
-      weight: 13.397,
-      height: 4.799,
-      age: 5.677,
-    },
-    female: {
-      number: 447.593,
-      weight: 9.247,
-      height: 3.098,
-      age: 4.33,
-    },
-  };
-
-  const genderNeutralCalculator = (
-    props: { weight: number; height: number; age: number },
-    multipliers: { weight: number; height: number; age: number; number: number }
-  ) => {
-    return {
-      value:
-        multipliers.number +
-        multipliers.weight * props.weight +
-        multipliers.height * props.height -
-        multipliers.age * props.age,
-      formula: `${multipliers.number} + (${multipliers.weight} * ${props.weight} + (${multipliers.height} * ${props.height}) - ( ${props.weight} * ${props.age} )`,
-    };
-  };
-
-  return genderNeutralCalculator(
-    {
-      weight: props.weightInKilograms,
-      height: props.heightInCentimeters,
-      age: props.age,
-    },
-    multipliers[props.gender as "male" | "female"]
-  );
-};
+// export const calculateBasalMetabolicRate = (props: {
+//   weightInKilograms: number;
+//   heightInCentimeters: number;
+//   age: number;
+//   gender: string;
+// }) => {
+// };
 // export const calculateOneRepMax = (props: { weight: number; reps: number }) => {
 //   const { weight, reps } = props;
 
