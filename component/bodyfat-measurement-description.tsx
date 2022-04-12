@@ -1,4 +1,4 @@
-import { Paper, Grid } from "@mui/material";
+import { Paper, Grid, Typography } from "@mui/material";
 import { BodyfatMeasurementList } from "./bodyfat-measurement-list";
 
 export const BodyfatMeasurementDescription = (props: {
@@ -15,12 +15,12 @@ export const BodyfatMeasurementDescription = (props: {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <p>
+        <Typography>
           All skinfold Measurements are taken on the right side of body. The
           muscle group that is being assessed should be relaxed. Wait one to two
           seconds after releasing the calipers, and take multiple measurements
           to find an average.
-        </p>
+        </Typography>
       </Grid>
       <Grid item xs={12} md={8}>
         <BodyfatMeasurementList fields={props.fields} />

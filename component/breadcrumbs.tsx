@@ -1,4 +1,4 @@
-import { Breadcrumbs, Typography } from "@mui/material";
+import { Box, Breadcrumbs, Container, Typography } from "@mui/material";
 import Link from "./link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -41,21 +41,23 @@ export const AppBreadcrumbs = () => {
   }
 
   return (
-    <Breadcrumbs aria-label="breadcrumb">
-      <Link href="/">HOME</Link>
-      {breadcrumbs.map((breadcrumb, i) => {
-        return (
-          <Link key={i} href={breadcrumb.href}>
-            {i === breadcrumbs.length - 1 ? (
-              <Typography color="text.primary">
-                {convertBreadcrumb(breadcrumb.breadcrumb)}
-              </Typography>
-            ) : (
-              convertBreadcrumb(breadcrumb.breadcrumb)
-            )}
-          </Link>
-        );
-      })}
-    </Breadcrumbs>
+    <Container component="nav" sx={{ py: 3 }}>
+      <Breadcrumbs aria-label="breadcrumb">
+        <Link href="/">HOME</Link>
+        {breadcrumbs.map((breadcrumb, i) => {
+          return (
+            <Link sx={{ fc: "text.light" }} key={i} href={breadcrumb.href}>
+              {i === breadcrumbs.length - 1 ? (
+                <Typography color="text.primary">
+                  {convertBreadcrumb(breadcrumb.breadcrumb)}
+                </Typography>
+              ) : (
+                convertBreadcrumb(breadcrumb.breadcrumb)
+              )}
+            </Link>
+          );
+        })}
+      </Breadcrumbs>
+    </Container>
   );
 };

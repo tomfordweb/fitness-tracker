@@ -1,6 +1,7 @@
 import { Formik } from "formik";
 import { useState } from "react";
 import { BASE_URL } from "../../lib/constant";
+import { BodyfatResultCard } from "./bodyfat-result-card";
 import { SharedJpBodyfatControls } from "./shared-jp-bodyfat-controls";
 export const JacksonPollock3PointBodyfatCalculator = () => {
   const [formError, setFormError] = useState("");
@@ -131,10 +132,12 @@ export const JacksonPollock3PointBodyfatCalculator = () => {
           </form>
         )}
       </Formik>
-      <p>Your body density is: {bodyDensity}</p>
-      <p>{bodyDensityFormula}</p>
-      <p>Your body fat percentage is: {bodyFatPercentage}</p>
-      <p>{bodyFatPercentageFormula}</p>
+      <BodyfatResultCard
+        bodyFat={bodyFatPercentage}
+        bodyFatFormula={bodyFatPercentageFormula}
+        bodyDensity={bodyDensity}
+        bodyDensityFormula={bodyDensityFormula}
+      />
     </div>
   );
 };

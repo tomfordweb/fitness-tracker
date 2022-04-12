@@ -1,3 +1,5 @@
+import { List, ListItem, ListItemText } from "@mui/material";
+
 export const BodyfatMeasurementList = (props: {
   fields: {
     chest?: true;
@@ -10,54 +12,68 @@ export const BodyfatMeasurementList = (props: {
   };
 }) => {
   return (
-    <ul>
+    <List>
       {props.fields.chest && (
-        <li>
-          Chest: The chest measurement is located between the nipple and the
-          armpit. The skinfold pinch should in a diagonal line that is parallel
-          to the direction of the nipple-armpit line.
-        </li>
+        <ListItem>
+          <ListItemText>
+            Chest: The chest measurement is located between the nipple and the
+            armpit. The skinfold pinch should in a diagonal line that is
+            parallel to the direction of the nipple-armpit line.
+          </ListItemText>
+        </ListItem>
       )}
       {props.fields.midauxilary && (
-        <li>
-          Midaxillary: The midaxiliary location is the horizontal or vertical
-          skinfold on the side of the torso at the fifth rib. Follow a
-          horizontal line from the tip of your sternum.
-        </li>
+        <ListItem>
+          <ListItemText>
+            Midaxillary: The midaxiliary location is the horizontal or vertical
+            skinfold on the side of the torso at the fifth rib. Follow a
+            horizontal line from the tip of your sternum.
+          </ListItemText>
+        </ListItem>
       )}
       {props.fields.tricep && (
-        <li>
-          Tricep: Take a vertical skinfold that is halfway between the top
-          portion of the shoulder and the elbow.
-        </li>
+        <ListItem>
+          <ListItemText>
+            Tricep: Take a vertical skinfold that is halfway between the top
+            portion of the shoulder and the elbow.
+          </ListItemText>
+        </ListItem>
       )}
       {props.fields.subscapular && (
-        <li>
-          Subscapular: The subscapular site is located at the bottom tip of the
-          shoulder blade. This shold be measured at a 45 degree angle.
-        </li>
+        <ListItem>
+          <ListItemText>
+            Subscapular: The subscapular site is located at the bottom tip of
+            the shoulder blade. This shold be measured at a 45 degree angle.
+          </ListItemText>
+        </ListItem>
       )}
       {props.fields.abdominal && (
-        <li>
-          Abdominal: For the abdominal measurement, take a horizontal or
-          vertical skinfold (whichever is most comfortable) that is one inch to
-          the right of the belly button.
-        </li>
+        <ListItem>
+          <ListItemText>
+            Abdominal: For the abdominal measurement, take a horizontal or
+            vertical skinfold (whichever is most comfortable) that is one inch
+            to the right of the belly button.
+          </ListItemText>
+        </ListItem>
       )}
       {props.fields.suprailiac && (
-        <li>
-          Suprailiac: The suprailiac measurement shold be taken be at a 45&deg;
-          angle, going up and away from the body, approximately two inches above
-          the iliac crest.
-        </li>
+        <ListItem>
+          <ListItemText>
+            Suprailiac: The suprailiac measurement shold be taken be at a
+            45&deg; angle, going up and away from the body, approximately two
+            inches above the iliac crest.
+          </ListItemText>
+        </ListItem>
       )}
       {props.fields.thigh && (
-        <li>
-          Thigh: The thigh measurement is located along the anterior portion the
-          quadriceps muscle, halfway between the upper part of the knee and the
-          fold at the top of the thigh.
-        </li>
+        <ListItem>
+          <ListItemText>
+            Thigh: The thigh measurement is located along the anterior portion
+            the quadriceps muscle, halfway between the upper part of the knee
+            and the fold at the top of the thigh.
+          </ListItemText>
+        </ListItem>
       )}
-    </ul>
+    </List>
   );
 };
