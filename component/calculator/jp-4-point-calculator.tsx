@@ -1,6 +1,6 @@
 import { Formik } from "formik";
 import { useState } from "react";
-import { calculateJacksonPollock4Point } from "../../lib/calculators";
+import { BASE_URL } from "../../lib/constant";
 import { SharedJpBodyfatControls } from "./shared-jp-bodyfat-controls";
 
 export const JacksonPollock4PointBodyfatCalculator = () => {
@@ -8,9 +8,8 @@ export const JacksonPollock4PointBodyfatCalculator = () => {
     style: "4point",
     gender: "female",
     age: "",
-
     tricep: "",
-    abdomen: "",
+    abdominal: "",
     suprailiac: "",
     thigh: "",
   });
@@ -36,8 +35,8 @@ export const JacksonPollock4PointBodyfatCalculator = () => {
           if (!values.suprailiac) {
             errors.suprailiac = "Required";
           }
-          if (!values.abdomen) {
-            errors.abdomen = "Required";
+          if (!values.abdominal) {
+            errors.abdominal = "Required";
           }
           if (!values.tricep) {
             errors.tricep = "Required";
@@ -46,11 +45,21 @@ export const JacksonPollock4PointBodyfatCalculator = () => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          const data = calculateJacksonPollock4Point(values);
-          setFormValues(values);
-          setBodyFatPercentageFormula(data.bodyFatFormula);
-          setBodyFatPercentage(data.bodyFat);
-          setSubmitting(false);
+          const url = new URL(
+            BASE_URL + "/api/calculator/jackson-pollock-4-point"
+          );
+
+          url.search = new URLSearchParams(values).toString();
+          fetch(url.toString())
+            .then((data) => data.json())
+            .then((data) => {
+              setBodyFatPercentageFormula(data.bodyFatFormula);
+              setBodyFatPercentage(data.bodyFat);
+              setSubmitting(false);
+            })
+            .catch((error) => {
+              setSubmitting(false);
+            });
         }}
       >
         {({

@@ -4,6 +4,7 @@ import {
   calculateJacksonPollock3PointFemale,
   calculateJacksonPollock3PointMale,
 } from "../../lib/calculators";
+import { BASE_URL } from "../../lib/constant";
 import { SharedJpBodyfatControls } from "./shared-jp-bodyfat-controls";
 export const JacksonPollock3PointBodyfatCalculator = () => {
   const [form, setFormValues] = useState({
@@ -60,18 +61,30 @@ export const JacksonPollock3PointBodyfatCalculator = () => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          let data;
+          let url: URL;
           if (values.gender === "female") {
-            data = calculateJacksonPollock3PointFemale(values);
+            url = new URL(
+              BASE_URL + "/api/calculator/jackson-pollock-3-point-female"
+            );
           } else {
-            data = calculateJacksonPollock3PointMale(values);
+            url = new URL(
+              BASE_URL + "/api/calculator/jackson-pollock-3-point-male"
+            );
           }
-          setFormValues(values);
-          setBodyDensityFormula(data.bodyDensityFormula);
-          setBodyDensity(data.bodyDensity);
-          setBodyFatPercentageFormula(data.bodyFatFormula);
-          setBodyFatPercentage(data.bodyFat);
-          setSubmitting(false);
+          url.search = new URLSearchParams(values).toString();
+
+          fetch(url.toString())
+            .then((data) => data.json())
+            .then((data) => {
+              setBodyDensityFormula(data.bodyDensityFormula);
+              setBodyDensity(data.bodyDensity);
+              setBodyFatPercentageFormula(data.bodyFatFormula);
+              setBodyFatPercentage(data.bodyFat);
+              setSubmitting(false);
+            })
+            .catch((error) => {
+              setSubmitting(false);
+            });
         }}
       >
         {({

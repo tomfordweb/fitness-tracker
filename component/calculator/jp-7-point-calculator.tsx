@@ -1,9 +1,12 @@
 import { Formik } from "formik";
 import { useState } from "react";
-import { calculateJacksonPollock7Point } from "../../lib/calculators";
+import { BASE_URL } from "../../lib/constant";
 import { SharedJpBodyfatControls } from "./shared-jp-bodyfat-controls";
+import Joi from "joi";
+
 export const SevenPointBodyFatCalculator = () => {
   const [form, setFormValues] = useState({
+    style: Joi.string(),
     gender: "female",
     age: "",
     chest: "",
@@ -57,13 +60,23 @@ export const SevenPointBodyFatCalculator = () => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          const data = calculateJacksonPollock7Point(values);
-          setFormValues(values);
-          setBodyDensityFormula(data.bodyDensityFormula);
-          setBodyDensity(data.bodyDensity);
-          setBodyFatPercentageFormula(data.bodyFatFormula);
-          setBodyFatPercentage(data.bodyFat);
-          setSubmitting(false);
+          const url = new URL(
+            BASE_URL + "/api/calculator/jackson-pollock-7-point"
+          );
+
+          url.search = new URLSearchParams(values).toString();
+          fetch(url.toString())
+            .then((data) => data.json())
+            .then((data) => {
+              setBodyDensityFormula(data.bodyDensityFormula);
+              setBodyDensity(data.bodyDensity);
+              setBodyFatPercentageFormula(data.bodyFatFormula);
+              setBodyFatPercentage(data.bodyFat);
+              setSubmitting(false);
+            })
+            .catch((error) => {
+              setSubmitting(false);
+            });
         }}
       >
         {({

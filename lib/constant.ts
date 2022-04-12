@@ -1,4 +1,9 @@
 import { CalculatorLink } from "./interface";
+/**
+ * TODO: this should be done differently...
+ */
+export const BASE_URL = "http://localhost:3000";
+
 export const NUTRITION_CALCULATORS = [
   {
     href: "/nutrition-calculators/basal-metabolic-rate",

@@ -113,161 +113,66 @@ export const calculateUsNavyBodyfatCalculatorFemale = (props: {
 };
 
 // mm
-export const calculateJacksonPollock3PointFemale = (props: {
-  chest: string;
-  abdominal: string;
-  thigh: string;
-  age: string;
-}) => {
-  const skinFolds = [props.chest, props.abdominal, props.thigh].map((val) =>
-    parseInt(val)
-  );
+// export const calculateJacksonPollock3PointFemale = (props: {
+//   chest: string;
+//   abdominal: string;
+//   thigh: string;
+//   age: string;
+// }) => {
+// };
 
-  const sumOfSkinfolds = skinFolds.reduce((a, b) => a + b, 0);
-
-  return jacksonPollockBodyfatFromDensity({
-    bodyDensity:
-      1.0994921 -
-      0.0009929 * sumOfSkinfolds +
-      0.0000023 * Math.pow(sumOfSkinfolds, 2) -
-      0.0001392 * parseInt(props.age),
-    bodyDensityFormula: `1.0994921 - 0.0009929 * ( ${skinFolds.join(
-      "+"
-    )} ) + 0.0000023 * ( ${skinFolds.join("+")} ) ^2 - 0.0001392 * ${
-      props.age
-    }`,
-  });
-};
-
-export const calculateJacksonPollock4Point = (props: {
-  gender: string;
-  age: string;
-  tricep: string;
-  abdomen: string;
-  suprailiac: string;
-  thigh: string;
-}) => {
-  const { gender, age } = props;
-
-  const densityMultipliers = {
-    female: {
-      one: 0.29669,
-      two: 0.00043,
-      three: 0.02963,
-      number: 1.4072,
-    },
-    male: {
-      one: 0.29288,
-      two: 0.0005,
-      three: 0.15845,
-      number: 5.76377,
-    },
-  };
-  const multipliers = densityMultipliers[gender as "male" | "female"];
-  const skinFolds = [
-    props.tricep,
-    props.abdomen,
-    props.suprailiac,
-    props.thigh,
-  ].map((val) => parseInt(val));
-
-  const sumOfSkinfolds = skinFolds.reduce((a, b) => a + b, 0);
-
-  const bodyFat =
-    multipliers.one * sumOfSkinfolds -
-    multipliers.two * Math.pow(sumOfSkinfolds, 2) +
-    multipliers.three * parseInt(age) -
-    multipliers.number;
-
-  const bodyFatFormula = `(${multipliers.one} * (${skinFolds.join("+")})) -
-            (${multipliers.two} * (${skinFolds.join("+")})^2) + (${
-    multipliers.three
-  } * ${age}) + ${multipliers.number}`;
-
-  return {
-    bodyFat,
-    bodyFatFormula,
-  };
-};
+// export const calculateJacksonPollock4Point = (props: {
+//   gender: string;
+//   age: string;
+//   tricep: string;
+//   abdomen: string;
+//   suprailiac: string;
+//   thigh: string;
+// }) => {
+// };
 
 // mm
-export const calculateJacksonPollock3PointMale = (props: {
-  chest: string;
-  abdominal: string;
-  thigh: string;
-  age: string;
-}) => {
-  const skinFolds = [props.chest, props.abdominal, props.thigh].map((val) =>
-    parseInt(val)
-  );
+// export const calculateJacksonPollock3PointMale = (props: {
+//   chest: string;
+//   abdominal: string;
+//   thigh: string;
+//   age: string;
+// }) => {
+//   const skinFolds = [props.chest, props.abdominal, props.thigh].map((val) =>
+//     parseInt(val)
+//   );
 
-  const sumOfSkinfolds = skinFolds.reduce((a, b) => a + b, 0);
+//   const sumOfSkinfolds = skinFolds.reduce((a, b) => a + b, 0);
 
-  return jacksonPollockBodyfatFromDensity({
-    bodyDensity:
-      1.10938 -
-      0.0008267 * sumOfSkinfolds +
-      0.0000016 * Math.pow(sumOfSkinfolds, 2) -
-      0.0002574 * parseInt(props.age),
-    bodyDensityFormula: `1.10938 - 0.0008267 * ( ${skinFolds.join(
-      " + "
-    )} ) + 0.0000016 * ( ${skinFolds.join(" + ")} )^2 - 0.0002574 * ${
-      props.age
-    }`,
-  });
-};
+//   return jacksonPollockBodyfatFromDensity({
+//     bodyDensity:
+//       1.10938 -
+//       0.0008267 * sumOfSkinfolds +
+//       0.0000016 * Math.pow(sumOfSkinfolds, 2) -
+//       0.0002574 * parseInt(props.age),
+//     bodyDensityFormula: `1.10938 - 0.0008267 * ( ${skinFolds.join(
+//       " + "
+//     )} ) + 0.0000016 * ( ${skinFolds.join(" + ")} )^2 - 0.0002574 * ${
+//       props.age
+//     }`,
+//   });
+// };
 
 // mm
-export const calculateJacksonPollock7Point = (props: {
-  gender: string;
-  age: string;
-  chest: string;
-  midauxilary: string;
-  tricep: string;
-  subscapular: string;
-  abdominal: string;
-  suprailiac: string;
-  thigh: string;
-}) => {
-  const { gender, age, ...everythingElse } = props;
+// export const calculateJacksonPollock7Point = (props: {
+//   gender: string;
+//   age: string;
+//   chest: string;
+//   midauxilary: string;
+//   tricep: string;
+//   subscapular: string;
+//   abdominal: string;
+//   suprailiac: string;
+//   thigh: string;
+// }) => {
+// };
 
-  const densityMultipliers = {
-    female: {
-      one: 0.00046971,
-      two: 0.00000056,
-      three: 0.00012828,
-      number: 1.097,
-    },
-    male: {
-      one: 0.00043499,
-      two: 0.00000055,
-      three: 0.00028826,
-      number: 1.112,
-    },
-  };
-  const skinFolds = Object.values(everythingElse).map((val) => parseInt(val));
-
-  const sumOfSkinfolds = skinFolds.reduce((a, b) => a + b, 0);
-  const multipliers = densityMultipliers[gender as "male" | "female"];
-
-  const bodyDensity =
-    multipliers.number -
-    multipliers.one * sumOfSkinfolds +
-    multipliers.two * Math.pow(sumOfSkinfolds, 2) -
-    multipliers.three * parseInt(age);
-
-  const bodyDensityFormula = `${multipliers.number} -
-            (${multipliers.one} * (${skinFolds.join("+")})) +
-            (${multipliers.two} * (${skinFolds.join("+")})^2) -
-            (${multipliers.three} * ${age})`;
-
-  return jacksonPollockBodyfatFromDensity({
-    bodyDensity,
-    bodyDensityFormula,
-  });
-};
-
-const jacksonPollockBodyfatFromDensity = (props: {
+export const jacksonPollockBodyfatFromDensity = (props: {
   bodyDensity: number;
   bodyDensityFormula: string;
 }) => {
