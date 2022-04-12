@@ -5,6 +5,7 @@ import { SharedJpBodyfatControls } from "./shared-jp-bodyfat-controls";
 import Joi from "joi";
 
 export const SevenPointBodyFatCalculator = () => {
+  const [formError, setFormError] = useState("");
   const [form, setFormValues] = useState({
     style: Joi.string(),
     gender: "female",
@@ -64,15 +65,20 @@ export const SevenPointBodyFatCalculator = () => {
             BASE_URL + "/api/calculator/jackson-pollock-7-point"
           );
 
+          setFormError("");
           url.search = new URLSearchParams(values).toString();
           fetch(url.toString())
             .then((data) => data.json())
             .then((data) => {
+              setSubmitting(false);
+              if (data.ok === false) {
+                setFormError("An API Error Occured.");
+                return;
+              }
               setBodyDensityFormula(data.bodyDensityFormula);
               setBodyDensity(data.bodyDensity);
               setBodyFatPercentageFormula(data.bodyFatFormula);
               setBodyFatPercentage(data.bodyFat);
-              setSubmitting(false);
             })
             .catch((error) => {
               setSubmitting(false);
@@ -97,6 +103,7 @@ export const SevenPointBodyFatCalculator = () => {
             }}
           >
             <SharedJpBodyfatControls
+              formError={formError}
               handleChange={handleChange}
               handleBlur={handleBlur}
               isSubmitting={isSubmitting}

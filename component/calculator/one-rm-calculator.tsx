@@ -1,7 +1,15 @@
-import { TextField, Button, Typography, Paper, Grid } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Typography,
+  Paper,
+  Grid,
+  Alert,
+} from "@mui/material";
 import { Formik } from "formik";
 import React, { useState } from "react";
 import { calculateOneRepMax } from "../../lib/calculators";
+import { BASE_URL } from "../../lib/constant";
 
 const OneRmCard = (props: { value: number; formula: string; name: string }) => (
   <Paper
@@ -31,6 +39,7 @@ const OneRmCard = (props: { value: number; formula: string; name: string }) => (
 );
 // source: https://www.athlegan.com/calculate-1rm
 export const OneRmCalculator = () => {
+  const [formError, setFormError] = useState("");
   const [form, setFormValues] = useState({
     weight: "",
     reps: "",
@@ -82,13 +91,29 @@ export const OneRmCalculator = () => {
 
           return errors;
         }}
-        onSubmit={(values, { setSubmitting }) => {
-          setSubmitting(false);
-          const weight = parseInt(values.weight);
-          const reps = parseInt(values.reps);
+        onSubmit={(values, { setErrors, setSubmitting }) => {
+          const url = new URL(BASE_URL + "/api/calculator/one-rep-max");
 
-          const oneRms = calculateOneRepMax({ weight, reps });
-          setOneRms(oneRms);
+          setFormError("");
+
+          url.search = new URLSearchParams(values).toString();
+          fetch(url.toString())
+            .then((data) => data.json())
+            .then((data) => {
+              console.log(data);
+
+              setSubmitting(false);
+              if (data.ok === false) {
+                setFormError("An API Error Occured.");
+              } else {
+                setOneRms(data);
+              }
+            })
+            .catch((error) => {
+              console.log("caught error");
+              console.error(error.json());
+              setSubmitting(false);
+            });
         }}
       >
         {({
@@ -148,6 +173,11 @@ export const OneRmCalculator = () => {
             >
               Submit
             </Button>
+            {Boolean(formError.length) && (
+              <Alert sx={{ mt: 3 }} severity="error">
+                {formError}
+              </Alert>
+            )}
           </form>
         )}
       </Formik>

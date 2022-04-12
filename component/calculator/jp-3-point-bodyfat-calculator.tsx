@@ -1,12 +1,9 @@
 import { Formik } from "formik";
 import { useState } from "react";
-import {
-  calculateJacksonPollock3PointFemale,
-  calculateJacksonPollock3PointMale,
-} from "../../lib/calculators";
 import { BASE_URL } from "../../lib/constant";
 import { SharedJpBodyfatControls } from "./shared-jp-bodyfat-controls";
 export const JacksonPollock3PointBodyfatCalculator = () => {
+  const [formError, setFormError] = useState("");
   const [form, setFormValues] = useState({
     gender: "female",
     style: "3point",
@@ -62,25 +59,43 @@ export const JacksonPollock3PointBodyfatCalculator = () => {
         }}
         onSubmit={(values, { setSubmitting }) => {
           let url: URL;
+          let submissionValues: Record<string, string>;
           if (values.gender === "female") {
             url = new URL(
               BASE_URL + "/api/calculator/jackson-pollock-3-point-female"
             );
+            submissionValues = {
+              tricep: values.tricep,
+              thigh: values.thigh,
+              suprailiac: values.suprailiac,
+              age: values.age,
+            };
           } else {
             url = new URL(
               BASE_URL + "/api/calculator/jackson-pollock-3-point-male"
             );
+            submissionValues = {
+              chest: values.chest,
+              abdominal: values.abdominal,
+              thigh: values.thigh,
+              age: values.age,
+            };
           }
-          url.search = new URLSearchParams(values).toString();
+          url.search = new URLSearchParams(submissionValues).toString();
 
+          setFormError("");
           fetch(url.toString())
             .then((data) => data.json())
             .then((data) => {
+              setSubmitting(false);
+              if (data.ok === false) {
+                setFormError("An API Error Occured.");
+                return;
+              }
               setBodyDensityFormula(data.bodyDensityFormula);
               setBodyDensity(data.bodyDensity);
               setBodyFatPercentageFormula(data.bodyFatFormula);
               setBodyFatPercentage(data.bodyFat);
-              setSubmitting(false);
             })
             .catch((error) => {
               setSubmitting(false);
@@ -105,6 +120,7 @@ export const JacksonPollock3PointBodyfatCalculator = () => {
             }}
           >
             <SharedJpBodyfatControls
+              formError={formError}
               handleChange={handleChange}
               handleBlur={handleBlur}
               isSubmitting={isSubmitting}

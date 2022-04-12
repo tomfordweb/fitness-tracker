@@ -5,7 +5,6 @@ import Joi from "joi";
 import validate from "../../../lib/middleware";
 
 const schema = Joi.object({
-  style: Joi.string(),
   tricep: Joi.number().min(0).required(),
   thigh: Joi.number().min(0).required(),
   suprailiac: Joi.number().min(0).required(),

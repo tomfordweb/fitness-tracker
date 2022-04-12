@@ -4,6 +4,7 @@ import { BASE_URL } from "../../lib/constant";
 import { SharedJpBodyfatControls } from "./shared-jp-bodyfat-controls";
 
 export const JacksonPollock4PointBodyfatCalculator = () => {
+  const [formError, setFormError] = useState("");
   const [form, setFormValues] = useState({
     style: "4point",
     gender: "female",
@@ -49,10 +50,16 @@ export const JacksonPollock4PointBodyfatCalculator = () => {
             BASE_URL + "/api/calculator/jackson-pollock-4-point"
           );
 
+          setFormError("");
           url.search = new URLSearchParams(values).toString();
           fetch(url.toString())
             .then((data) => data.json())
             .then((data) => {
+              console.log(data);
+              if (data.ok === false) {
+                setFormError("An API Error Occured.");
+                return;
+              }
               setBodyFatPercentageFormula(data.bodyFatFormula);
               setBodyFatPercentage(data.bodyFat);
               setSubmitting(false);
@@ -80,6 +87,7 @@ export const JacksonPollock4PointBodyfatCalculator = () => {
             }}
           >
             <SharedJpBodyfatControls
+              formError={formError}
               handleChange={handleChange}
               handleBlur={handleBlur}
               isSubmitting={isSubmitting}

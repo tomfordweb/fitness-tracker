@@ -1,4 +1,4 @@
-import { Button, TextField } from "@mui/material";
+import { Alert, Button, TextField } from "@mui/material";
 import { FormikErrors, FormikTouched } from "formik";
 import { ChangeEvent } from "react";
 import { GenderRadioOptions } from "./gender-radio-options";
@@ -16,6 +16,7 @@ interface Form {
   suprailiac: string;
 }
 export const SharedJpBodyfatControls = (props: {
+  formError: string;
   handleChange: (e: ChangeEvent<any>) => void;
   // TODO: this should be FocusEvent<any> - type errors?
   handleBlur: (e: any) => void;
@@ -170,6 +171,12 @@ export const SharedJpBodyfatControls = (props: {
       >
         Submit
       </Button>
+
+      {Boolean(props.formError.length) && (
+        <Alert sx={{ mt: 3 }} severity="error">
+          {props.formError}
+        </Alert>
+      )}
     </>
   );
 };

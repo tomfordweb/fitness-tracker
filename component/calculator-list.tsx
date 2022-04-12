@@ -9,8 +9,8 @@ export const CalculatorList = (props: {
 }) => {
   return (
     <ul>
-      {props.calculators.map((calculator) => (
-        <li>
+      {props.calculators.map((calculator, i) => (
+        <li key={i}>
           <Typography>
             <Link href={calculator.href}>{calculator.linkText}</Link>
           </Typography>
