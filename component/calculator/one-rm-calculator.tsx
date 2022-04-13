@@ -1,85 +1,24 @@
-import {
-  TextField,
-  Button,
-  Typography,
-  Paper,
-  Grid,
-  Alert,
-} from "@mui/material";
+import { TextField, Button, Grid, Alert } from "@mui/material";
 import { Formik } from "formik";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { calculateOneRepMax } from "../../lib/calculators";
 import { BASE_URL } from "../../lib/constant";
+import { OneRmCalculations } from "../../pages/strength-calculators/one-rep-max-calculator";
 
-const OneRmCard = (props: { value: number; formula: string; name: string }) => (
-  <Paper
-    sx={{
-      mb: 3,
-      p: 3,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      flexDirection: "column",
-    }}
-  >
-    <Typography variant="h3">
-      {props.value}
-      <Typography variant="overline">Lbs</Typography>
-    </Typography>
-    <Typography
-      sx={{ fontSize: 14 }}
-      variant="overline"
-      color="text.secondary"
-      gutterBottom
-    >
-      {props.name}
-    </Typography>
-    <Typography variant="caption">{props.formula}</Typography>
-  </Paper>
-);
 // source: https://www.athlegan.com/calculate-1rm
-export const OneRmCalculator = () => {
+export const OneRmCalculator = (props: {
+  onSuccess: (data: OneRmCalculations) => void;
+}) => {
+  const router = useRouter();
   const [formError, setFormError] = useState("");
-  const [form, setFormValues] = useState({
-    weight: "",
-    reps: "",
-  });
-
-  const [oneRms, setOneRms] = useState({
-    brzycki: {
-      value: 0,
-      formula: "",
-    },
-    oconner: {
-      value: 0,
-      formula: "",
-    },
-    mayhew: {
-      value: 0,
-      formula: "",
-    },
-    lombardi: {
-      value: 0,
-      formula: "",
-    },
-    lander: {
-      value: 0,
-      formula: "",
-    },
-    wathan: {
-      value: 0,
-      formula: "",
-    },
-    epley: {
-      value: 0,
-      formula: "",
-    },
-  });
-
   return (
     <div>
       <Formik
-        initialValues={form}
+        enableReinitialize
+        initialValues={{
+          weight: (router.query?.weight as string) || "",
+          reps: (router.query?.reps as string) || "",
+        }}
         validate={(values) => {
           const errors: Record<string, string> = {};
           if (!values.weight) {
@@ -91,28 +30,22 @@ export const OneRmCalculator = () => {
 
           return errors;
         }}
-        onSubmit={(values, { setErrors, setSubmitting }) => {
+        onSubmit={(values, { setSubmitting }) => {
           const url = new URL(BASE_URL + "/api/calculator/one-rep-max");
 
           setFormError("");
 
+          setSubmitting(false);
           url.search = new URLSearchParams(values).toString();
+
           fetch(url.toString())
             .then((data) => data.json())
             .then((data) => {
-              console.log(data);
-
-              setSubmitting(false);
               if (data.ok === false) {
                 setFormError("An API Error Occured.");
               } else {
-                setOneRms(data);
+                props.onSuccess(data);
               }
-            })
-            .catch((error) => {
-              console.log("caught error");
-              console.error(error.json());
-              setSubmitting(false);
             });
         }}
       >
@@ -181,29 +114,6 @@ export const OneRmCalculator = () => {
           </form>
         )}
       </Formik>
-      <Grid sx={{ mt: 3 }} container spacing={2}>
-        <Grid item xs={3}>
-          <OneRmCard {...oneRms.brzycki} name="Brzycki" />
-        </Grid>
-        <Grid item xs={3}>
-          <OneRmCard {...oneRms.epley} name="Epley" />
-        </Grid>
-        <Grid item xs={3}>
-          <OneRmCard {...oneRms.lander} name="Lander" />
-        </Grid>
-        <Grid item xs={3}>
-          <OneRmCard {...oneRms.mayhew} name="Mayhew" />
-        </Grid>
-        <Grid item xs={3}>
-          <OneRmCard {...oneRms.wathan} name="Wathan" />
-        </Grid>
-        <Grid item xs={3}>
-          <OneRmCard {...oneRms.oconner} name="O'Connor" />
-        </Grid>
-        <Grid item xs={3}>
-          <OneRmCard {...oneRms.lombardi} name="Lombardi" />
-        </Grid>
-      </Grid>
     </div>
   );
 };

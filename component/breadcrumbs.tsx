@@ -20,7 +20,8 @@ export const AppBreadcrumbs = () => {
 
   useEffect(() => {
     if (router) {
-      const linkPath = router.asPath.split("/");
+      const path = router.asPath.split("?")[0];
+      const linkPath = path.split("/");
       linkPath.shift();
 
       const pathArray = linkPath

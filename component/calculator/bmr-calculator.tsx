@@ -1,10 +1,11 @@
 import { TextField, Button, Alert } from "@mui/material";
 import { Formik } from "formik";
 import { useState } from "react";
-import { calculateBasalMetabolicRate } from "../../lib/calculators";
 import { BASE_URL } from "../../lib/constant";
 import { GenderRadioOptions } from "./gender-radio-options";
-export const BasalMetabolicRateCalculator = () => {
+export const BasalMetabolicRateCalculator = (props: {
+  handleFormUpdate: (props: { value: number; formula: string }) => void;
+}) => {
   const [formError, setFormError] = useState("");
   const [form, setFormValues] = useState({
     gender: "female",
@@ -53,6 +54,7 @@ export const BasalMetabolicRateCalculator = () => {
                 setFormError("An API Error Occured.");
                 return;
               }
+              props.handleFormUpdate(data);
               setBmr(data);
               setSubmitting(false);
             })

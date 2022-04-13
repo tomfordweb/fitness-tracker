@@ -12,21 +12,22 @@ import Link from "../link";
 import { Formik } from "formik";
 import { useState } from "react";
 import { Box } from "@mui/system";
+import { useRouter } from "next/router";
 export const TdeeCalculator = () => {
-  const [form, setFormValues] = useState({
-    activityLevel: "",
-    bmr: "",
-  });
+  const router = useRouter();
 
   const [tdee, setTdee] = useState(0);
 
   return (
     <div>
       <Formik
-        initialValues={form}
+        enableReinitialize
+        initialValues={{
+          activityLevel: "",
+          bmr: (router.query?.bmr as string) || "",
+        }}
         validate={(values) => {
           const errors: Record<string, string> = {};
-          console.log(values);
           if (!values.activityLevel) {
             errors.activityLevel = "Required";
           }

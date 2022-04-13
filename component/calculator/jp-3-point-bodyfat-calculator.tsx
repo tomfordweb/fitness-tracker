@@ -1,30 +1,34 @@
 import { Formik } from "formik";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { BASE_URL } from "../../lib/constant";
-import { BodyfatResultCard } from "./bodyfat-result-card";
+import { ResultCard } from "../result-card";
 import { SharedJpBodyfatControls } from "./shared-jp-bodyfat-controls";
 export const JacksonPollock3PointBodyfatCalculator = () => {
+  const router = useRouter();
   const [formError, setFormError] = useState("");
-  const [form, setFormValues] = useState({
-    gender: "female",
-    style: "3point",
-    age: "",
-    chest: "",
-    abdominal: "",
-    tricep: "",
-    suprailiac: "",
-    thigh: "",
-  });
+  const [form, setFormValues] = useState();
 
   const [bodyFatPercentage, setBodyFatPercentage] = useState(0);
   const [bodyFatPercentageFormula, setBodyFatPercentageFormula] = useState("");
   const [bodyDensity, setBodyDensity] = useState(0);
-  const [bodyDensityFormula, setBodyDensityFormula] = useState("");
+  const [bodyDensityFormula, setBodyDensityFormula] =
+    useState("default formula");
 
   return (
     <div>
       <Formik
-        initialValues={form}
+        enableReinitialize
+        initialValues={{
+          gender: (router.query?.gender as string) || "female",
+          age: (router.query?.age as string) || "",
+          tricep: (router.query?.tricep as string) || "",
+          chest: (router.query?.chest as string) || "",
+          abdominal: (router.query?.abdominal as string) || "",
+          suprailiac: (router.query?.suprailiac as string) || "",
+          thigh: (router.query?.thigh as string) || "",
+          style: "3point",
+        }}
         validate={(values) => {
           const errors: Record<string, string> = {};
           if (!values.age) {
@@ -132,11 +136,15 @@ export const JacksonPollock3PointBodyfatCalculator = () => {
           </form>
         )}
       </Formik>
-      <BodyfatResultCard
-        bodyFat={bodyFatPercentage}
-        bodyFatFormula={bodyFatPercentageFormula}
-        bodyDensity={bodyDensity}
-        bodyDensityFormula={bodyDensityFormula}
+      <ResultCard
+        title="Body Density"
+        value={bodyDensity}
+        formula={bodyDensityFormula}
+      />
+      <ResultCard
+        title="Bodyfat"
+        value={bodyFatPercentage}
+        formula={bodyFatPercentageFormula}
       />
     </div>
   );

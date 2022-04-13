@@ -3,13 +3,18 @@ import { NextPage } from "next";
 import { BasalMetabolicRateCalculator } from "../../component/calculator/bmr-calculator";
 import { PageTitle } from "../../component/page-title";
 import Link from "../../component/link";
+import { useState } from "react";
 
 const BasalMetabolicRateCalculatorPage: NextPage = () => {
+  const [bmr, setBmr] = useState<number>(0);
+  const handleFormUpdate = (props: { value: number }) => {
+    setBmr(parseInt(props.value.toFixed(0)));
+  };
   return (
     <>
       <PageTitle h1="Basal Metabolic Rate (BMR) Calculator" />
       <Container component="section">
-        <BasalMetabolicRateCalculator />
+        <BasalMetabolicRateCalculator handleFormUpdate={handleFormUpdate} />
         <Typography variant="h2">
           What is the Basal Metabolic Rate (BMR)
         </Typography>
@@ -31,9 +36,17 @@ const BasalMetabolicRateCalculatorPage: NextPage = () => {
         </Typography>
         <Typography>
           With your BMR you can{" "}
-          <Link href="/nutrition-calculators/total-daily-energy-expenditure">
-            determine your Total Daily Energy Expenditure (TDEE)
-          </Link>{" "}
+          {bmr ? (
+            <Link
+              href={`/nutrition-calculators/total-daily-energy-expenditure?bmr=${bmr}`}
+            >
+              determine your Total Daily Energy Expenditure (TDEE)
+            </Link>
+          ) : (
+            <Link href="/nutrition-calculators/total-daily-energy-expenditure">
+              determine your Total Daily Energy Expenditure (TDEE)
+            </Link>
+          )}{" "}
           which will tell you how many calories you can consume in a day to
           maintain weight.
         </Typography>
