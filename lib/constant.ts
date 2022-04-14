@@ -7,79 +7,66 @@ export const BASE_URL = "http://localhost:3000";
 export const NUTRITION_CALCULATORS = [
   {
     href: "/nutrition-calculators/basal-metabolic-rate",
-    linkText: "Basal Metabolic Rate",
+    linkText: "BMR Calculator",
   },
   {
     href: "/nutrition-calculators/total-daily-energy-expenditure",
-    linkText: "Total Daily Energy Expenditure",
+    linkText: "TDEE Calculator",
   },
 ];
 
 export const STRENGTH_CALCULATORS = [
   {
     href: "/strength-calculators/one-rep-max-calculator",
-    linkText: "One Rep Max Calculator",
+    linkText: "1RM Calculator",
   },
 ];
 
 export const BODYFAT_CALCULATORS: CalculatorLink[] = [
   {
     href: "/bodyfat-calculator/jackson-pollock-3-point",
-    linkText: "Jackson & Pollock 3 Point Bodyfat Calculator",
+    linkText: "3 Point Bodyfat Calculator",
   },
   {
     href: "/bodyfat-calculator/jackson-pollock-4-point",
-    linkText: "Jackson & Pollock 4 Point Bodyfat Calculator",
+    linkText: "4 Point Bodyfat Calculator",
   },
   {
     href: "/bodyfat-calculator/jackson-pollock-7-point",
-    linkText: "Jackson & Pollock 7 Point Bodyfat Calculator",
+    linkText: "7 Point Bodyfat Calculator",
   },
   {
     href: "/bodyfat-calculator/us-navy-girth",
-    linkText: "US Navy",
+    linkText: "Navy Bodyfat Calculator",
   },
 ];
 export const CALCULATORS: {
-  category: string;
-  groups: {
-    title: string;
-    description: string;
+  title: string;
+  description: string;
+  href: string;
+  calculators: {
     href: string;
-    calculators: {
-      href: string;
-      linkText: string;
-    }[];
+    linkText: string;
   }[];
 }[] = [
   {
-    category: "Diet and Nutrition",
-    groups: [
-      {
-        title: "Bodyfat Calculators",
-        description:
-          "Determine your body fat percentage using a variety of easy to use calculators!",
-        href: "/bodyfat-calculator",
-        calculators: BODYFAT_CALCULATORS,
-      },
-      {
-        title: "Nutrition",
-        description: "What goes in must come out",
-        href: "/nutrition-calculators",
-        calculators: NUTRITION_CALCULATORS,
-      },
-    ],
+    title: "Bodyfat Calculators",
+    description:
+      "Determine your body fat percentage using a variety of easy to use calculators!",
+    href: "",
+    calculators: BODYFAT_CALCULATORS,
   },
   {
-    category: "Strength",
-    groups: [
-      {
-        title: "Strength Calculators",
-        description: "Do you even lift bro?",
-        href: "/strength-calculators",
-        calculators: STRENGTH_CALCULATORS,
-      },
-    ],
+    title: "Nutrition",
+    description: "What goes in must come out",
+    href: "",
+    calculators: NUTRITION_CALCULATORS,
+  },
+  {
+    title: "Strength Calculators",
+    description: "Do you even lift bro?",
+    href: "",
+    calculators: STRENGTH_CALCULATORS,
   },
 ];
 

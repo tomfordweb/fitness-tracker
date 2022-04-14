@@ -1,16 +1,8 @@
-import {
-  Radio,
-  TextField,
-  Button,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
-  Alert,
-} from "@mui/material";
+import { TextField, Button, Alert } from "@mui/material";
 import { Formik } from "formik";
 import { useState } from "react";
 import { BASE_URL } from "../../lib/constant";
+import { ResultCard } from "../result-card";
 import { GenderRadioOptions } from "./gender-radio-options";
 export const UsNavyBodyfatCalculator = () => {
   const [formError, setFormError] = useState("");
@@ -119,6 +111,7 @@ export const UsNavyBodyfatCalculator = () => {
             />
             <TextField
               className="form-control"
+              sx={{ mb: 3 }}
               label="Height Measurement"
               id="height"
               name="height"
@@ -134,6 +127,7 @@ export const UsNavyBodyfatCalculator = () => {
                 <TextField
                   className="form-control"
                   label="Waist Measurement"
+                  sx={{ mb: 3 }}
                   id="waist"
                   name="waist"
                   type="number"
@@ -147,6 +141,7 @@ export const UsNavyBodyfatCalculator = () => {
                   className="form-control"
                   label="Hips Measurement"
                   id="hips"
+                  sx={{ mb: 3 }}
                   name="hips"
                   type="number"
                   onChange={handleChange}
@@ -159,6 +154,7 @@ export const UsNavyBodyfatCalculator = () => {
                   className="form-control"
                   label="Neck Measurement"
                   id="neck"
+                  sx={{ mb: 3 }}
                   name="neck"
                   type="number"
                   onChange={handleChange}
@@ -177,6 +173,7 @@ export const UsNavyBodyfatCalculator = () => {
                   id="abdomen"
                   name="abdomen"
                   type="number"
+                  sx={{ mb: 3 }}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.abdomen}
@@ -188,6 +185,7 @@ export const UsNavyBodyfatCalculator = () => {
                   label="Neck Measurement"
                   id="neck"
                   name="neck"
+                  sx={{ mb: 3 }}
                   type="number"
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -213,8 +211,11 @@ export const UsNavyBodyfatCalculator = () => {
           </form>
         )}
       </Formik>
-      <p>Your body fat percentage is: {bodyFatPercentage}</p>
-      <p>{bodyFatPercentageFormula}</p>
+      <ResultCard
+        title="Bodyfat"
+        value={bodyFatPercentage}
+        formula={bodyFatPercentageFormula}
+      />
     </div>
   );
 };

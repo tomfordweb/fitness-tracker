@@ -6,6 +6,7 @@ import {
   Chip,
   Typography,
   Container,
+  Grid,
 } from "@mui/material";
 import type { NextPage } from "next";
 import Link from "../component/link";
@@ -21,49 +22,43 @@ const Home: NextPage = () => {
         h1="The Best Fitness Calculators Online"
       />
       <Container component="section">
-        <article>
-          <p>
+        <Box component="div">
+          <Typography>
             Monitoring your fitness is essential to living a healthy and happy
             life. Use our efficient calculators to track and monitor your
             fitness.
-          </p>
-        </article>
-        <article>
-          {cards.map((section, i) => (
-            <Box component="div" key={i}>
-              <Typography variant="h2" color="text.secondary">
-                {section.category}
-              </Typography>
-              {section.groups.map((card, i) => (
-                <Card key={i} variant="outlined" sx={{ mb: 3 }}>
-                  <CardContent>
-                    <Typography variant="h5">
-                      {card.href.length > 0 ? (
-                        <Link href={card.href}>{card.title}</Link>
-                      ) : (
-                        card.title
-                      )}
-                    </Typography>
-                    <Typography color="text.secondary">
-                      {card.description}
-                    </Typography>
-                    <CardActions>
-                      {card.calculators.map((link, i) => (
-                        <Chip
-                          key={i}
-                          component={Link}
-                          clickable
-                          label={link.linkText}
-                          href={link.href}
-                        ></Chip>
-                      ))}
-                    </CardActions>
-                  </CardContent>
-                </Card>
-              ))}
-            </Box>
+          </Typography>
+        </Box>
+        <Grid container spacing={3}>
+          {cards.map((card, i) => (
+            <Grid item xs={12} md={6} key={i}>
+              <Card key={i} variant="outlined" sx={{ mb: 3 }}>
+                <CardContent>
+                  <Typography variant="h5">
+                    {card.href.length > 0 ? (
+                      <Link href={card.href}>{card.title}</Link>
+                    ) : (
+                      card.title
+                    )}
+                  </Typography>
+                  <Typography color="text.secondary">
+                    {card.description}
+                  </Typography>
+                  {card.calculators.map((link, i) => (
+                    <Chip
+                      key={i}
+                      sx={{ mb: 1, mr: 1 }}
+                      component={Link}
+                      clickable
+                      label={link.linkText}
+                      href={link.href}
+                    ></Chip>
+                  ))}
+                </CardContent>
+              </Card>
+            </Grid>
           ))}
-        </article>
+        </Grid>
       </Container>
     </>
   );
