@@ -13,10 +13,17 @@ import { Formik } from "formik";
 import { useState } from "react";
 import { Box } from "@mui/system";
 import { useRouter } from "next/router";
-export const TdeeCalculator = () => {
+import { BASE_URL, TDEE_ACTIVITY_LEVELS } from "../../lib/constant";
+export const TdeeCalculator = (props: {
+  onSubmit: (
+    data: { value: number; multiplier: number; label: string }[]
+  ) => void;
+}) => {
+  const [formError, setFormError] = useState("");
   const router = useRouter();
 
-  const [tdee, setTdee] = useState(0);
+  const [tdee, setTdee] = useState([]);
+  const [multiplier, setMultiplier] = useState("");
 
   return (
     <div>
@@ -37,8 +44,29 @@ export const TdeeCalculator = () => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          setTdee(parseFloat(values.activityLevel) * parseFloat(values.bmr));
-          setSubmitting(false);
+          setFormError("");
+          setMultiplier(values.activityLevel);
+          const url = new URL(
+            BASE_URL + "/api/calculator/total-daily-energy-expenditure"
+          );
+          url.search = new URLSearchParams({ bmr: values.bmr }).toString();
+          fetch(url.toString())
+            .then((data) => data.json())
+            .then((data) => {
+              setSubmitting(false);
+              if (data.ok === false) {
+                setFormError("An API Error Occured.");
+                return;
+              }
+              props.onSubmit({
+                data,
+                activityLevel: values.activityLevel,
+              });
+              setTdee(data);
+            })
+            .catch((error) => {
+              setSubmitting(false);
+            });
         }}
       >
         {({
@@ -68,31 +96,13 @@ export const TdeeCalculator = () => {
                 aria-labelledby="demo-row-radio-buttons-group-label"
                 name="activityLevel"
               >
-                <FormControlLabel
-                  value="1.2"
-                  control={<Radio />}
-                  label="Sedentary - little to no exercise, desk job"
-                />
-                <FormControlLabel
-                  value="1.375"
-                  control={<Radio />}
-                  label="Lightly Active - Light exercise / sports 1-3 days per week."
-                />
-                <FormControlLabel
-                  value="1.55"
-                  control={<Radio />}
-                  label="Moderately Active - Moderate Exercise / sports 6-7 days per week."
-                />
-                <FormControlLabel
-                  value="1.725"
-                  control={<Radio />}
-                  label="Very Active - Hard Exercise daily, moderate exercise twice a day"
-                />
-                <FormControlLabel
-                  value="1.9"
-                  control={<Radio />}
-                  label="Extra Active - Hard exercise 2 or more times a day."
-                />
+                {TDEE_ACTIVITY_LEVELS.map((activityLevel) => (
+                  <FormControlLabel
+                    value={activityLevel.multiplier.toString()}
+                    control={<Radio />}
+                    label={activityLevel.label}
+                  />
+                ))}
               </RadioGroup>
             </FormControl>
             <Box
@@ -133,7 +143,6 @@ export const TdeeCalculator = () => {
           </form>
         )}
       </Formik>
-      <p>Your TDEE is {tdee}</p>
     </div>
   );
 };

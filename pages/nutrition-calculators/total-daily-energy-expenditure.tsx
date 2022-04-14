@@ -1,14 +1,31 @@
-import { Container, Typography } from "@mui/material";
 import { NextPage } from "next";
+import { useState } from "react";
 import { TdeeCalculator } from "../../component/calculator/tdee-calculator";
 import { PageTitle } from "../../component/page-title";
 
+import {
+  Container,
+  Grid,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@mui/material";
 const TdeeCalculatorPage: NextPage = () => {
+  const [tdee, setTdee] = useState<{
+    activityLevel: number;
+    data: { value: number; multiplier: number; label: string }[];
+  }>({ activityLevel: 0, data: [] });
+
   return (
     <>
       <PageTitle h1="Total Daily Energy Expenditure (TDEE) Calculator" />
       <Container component="section">
-        <TdeeCalculator />
+        <TdeeCalculator onSubmit={(data) => setTdee(data)} />
         <Typography variant="h2">How TDEE Is Calculated </Typography>
         <Typography sx={{ mb: 3 }}>
           Your Total Daily Energy Expenditure (TDEE) is an estimation of how
@@ -23,6 +40,28 @@ const TdeeCalculatorPage: NextPage = () => {
           sedentary lifestyle. Our TDEE calculator uses the best formulas and
           displays your score in a way that's easy to read and meaningful.
         </Typography>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+            <TableBody>
+              {tdee.data.map((tdee) => (
+                <TableRow
+                  key={tdee.label}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    sx={{ bgcolor: "secondary.light" }}
+                  >
+                    {tdee.label}
+                  </TableCell>
+
+                  <TableCell align="right">{tdee.value}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Container>
     </>
   );

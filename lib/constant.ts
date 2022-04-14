@@ -82,3 +82,27 @@ export const CALCULATORS: {
     ],
   },
 ];
+
+export const TDEE_ACTIVITY_LEVELS = [
+  {
+    multiplier: 1.2,
+    label: "Sedentary - little to no exercise, desk job.",
+  },
+
+  {
+    multiplier: 1.375,
+    label: "Lightly Active - Light exercise / sports 1-3 days per week.",
+  },
+  {
+    multiplier: 1.55,
+    label: "Moderately Active - Moderate Exercise / sports 6-7 days per week.",
+  },
+  {
+    multiplier: 1.725,
+    label: "Very Active - Hard Exercise daily, moderate exercise twice a day",
+  },
+  {
+    multiplier: 1.9,
+    label: "Extra Active - Hard exercise 2 or more times a day.",
+  },
+];
