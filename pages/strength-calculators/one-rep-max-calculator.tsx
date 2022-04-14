@@ -18,11 +18,9 @@ import { PageTitle } from "../../component/page-title";
 import { ResultCard } from "../../component/result-card";
 import { ApiSimpleCalculatedData } from "../api/calculator/one-rep-max";
 
+// https://goodcalculators.com/bench-press-calculator/
 export const OneRepMaxCalculatorPage: NextPage = () => {
   const [oneRms, setOneRms] = useState<ApiSimpleCalculatedData[]>([]);
-  const [activeCard, setActiveCard] = useState<ApiSimpleCalculatedData | null>(
-    null
-  );
 
   return (
     <>
@@ -35,21 +33,12 @@ export const OneRepMaxCalculatorPage: NextPage = () => {
           <>
             <Typography>
               Below are the one rep max calculations for the provided weight and
-              reps. You can click a card below to see the percentage against the
-              rep range table.
+              reps.
             </Typography>
             <Grid sx={{ my: 3 }} container spacing={2}>
               {oneRms.map((oneRm) => (
-                <Grid
-                  key={oneRm.title}
-                  item
-                  xs={3}
-                  onClick={() => setActiveCard(oneRm)}
-                >
-                  <ResultCard
-                    active={activeCard?.title === oneRm.title}
-                    {...oneRm}
-                  />
+                <Grid key={oneRm.title} item xs={3}>
+                  <ResultCard {...oneRm} />
                 </Grid>
               ))}
             </Grid>
