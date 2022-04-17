@@ -7,6 +7,7 @@ import {
   RadioGroup,
   FormControlLabel,
   Grid,
+  Alert,
 } from "@mui/material";
 import Link from "../link";
 import { Formik } from "formik";
@@ -15,9 +16,10 @@ import { Box } from "@mui/system";
 import { useRouter } from "next/router";
 import { BASE_URL, TDEE_ACTIVITY_LEVELS } from "../../lib/constant";
 export const TdeeCalculator = (props: {
-  onSubmit: (
-    data: { value: number; multiplier: number; label: string }[]
-  ) => void;
+  onSubmit: (props: {
+    activityLevel: string;
+    data: { value: number; multiplier: number; label: string }[];
+  }) => void;
 }) => {
   const [formError, setFormError] = useState("");
   const router = useRouter();
@@ -96,8 +98,9 @@ export const TdeeCalculator = (props: {
                 aria-labelledby="demo-row-radio-buttons-group-label"
                 name="activityLevel"
               >
-                {TDEE_ACTIVITY_LEVELS.map((activityLevel) => (
+                {TDEE_ACTIVITY_LEVELS.map((activityLevel, i) => (
                   <FormControlLabel
+                    key={i}
                     value={activityLevel.multiplier.toString()}
                     control={<Radio />}
                     label={activityLevel.label}
@@ -140,6 +143,11 @@ export const TdeeCalculator = (props: {
             >
               Submit
             </Button>
+            {Boolean(formError.length) && (
+              <Alert sx={{ mt: 3 }} severity="error">
+                {formError}
+              </Alert>
+            )}
           </form>
         )}
       </Formik>

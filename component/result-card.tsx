@@ -1,6 +1,5 @@
 import { Card, CardContent, Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { ReactNode } from "react";
 
 export const ResultCard = (props: {
   title: string;

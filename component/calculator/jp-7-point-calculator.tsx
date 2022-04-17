@@ -2,9 +2,6 @@ import { Formik } from "formik";
 import { useState } from "react";
 import { BASE_URL } from "../../lib/constant";
 import { SharedJpBodyfatControls } from "./shared-jp-bodyfat-controls";
-import Joi from "joi";
-import { Grid } from "@mui/material";
-import { ResultCard } from "../result-card";
 
 export const SevenPointBodyFatCalculator = () => {
   const [formError, setFormError] = useState("");

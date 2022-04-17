@@ -2,7 +2,6 @@ import { List, ListItem, ListItemText } from "@mui/material";
 import { Form } from "./calculator/shared-jp-bodyfat-controls";
 
 export const BodyfatMeasurementList = (props: { fields: Form }) => {
-  console.log(props.fields);
   return (
     <List>
       {"chest" in props.fields && (
