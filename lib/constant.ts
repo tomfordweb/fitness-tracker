@@ -6,37 +6,37 @@ export const BASE_URL = "http://localhost:3000";
 
 export const NUTRITION_CALCULATORS = [
   {
-    href: "/nutrition-calculators/basal-metabolic-rate",
+    href: "/basal-metabolic-rate",
     linkText: "BMR Calculator",
   },
   {
-    href: "/nutrition-calculators/total-daily-energy-expenditure",
+    href: "/total-daily-energy-expenditure",
     linkText: "TDEE Calculator",
   },
 ];
 
 export const STRENGTH_CALCULATORS = [
   {
-    href: "/strength-calculators/one-rep-max-calculator",
+    href: "/one-rep-max-calculator",
     linkText: "1RM Calculator",
   },
 ];
 
 export const BODYFAT_CALCULATORS: CalculatorLink[] = [
   {
-    href: "/bodyfat-calculator/jackson-pollock-3-point",
+    href: "/jackson-pollock-3-point",
     linkText: "3 Point Bodyfat Calculator",
   },
   {
-    href: "/bodyfat-calculator/jackson-pollock-4-point",
+    href: "/jackson-pollock-4-point",
     linkText: "4 Point Bodyfat Calculator",
   },
   {
-    href: "/bodyfat-calculator/jackson-pollock-7-point",
+    href: "/jackson-pollock-7-point",
     linkText: "7 Point Bodyfat Calculator",
   },
   {
-    href: "/bodyfat-calculator/us-navy-girth",
+    href: "/us-navy-girth",
     linkText: "Navy Bodyfat Calculator",
   },
 ];

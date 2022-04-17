@@ -1,17 +1,8 @@
 import { Paper, Grid, Typography } from "@mui/material";
 import { BodyfatMeasurementList } from "./bodyfat-measurement-list";
+import { Form } from "./calculator/shared-jp-bodyfat-controls";
 
-export const BodyfatMeasurementDescription = (props: {
-  fields: {
-    chest?: true;
-    midauxilary?: true;
-    tricep?: true;
-    subscapular?: true;
-    abdominal?: true;
-    suprailiac?: true;
-    thigh?: true;
-  };
-}) => {
+export const BodyfatMeasurementDescription = (props: { fields: Form }) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>

@@ -1,8 +1,8 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import { NextPage } from "next";
-import { BasalMetabolicRateCalculator } from "../../component/calculator/bmr-calculator";
-import { PageTitle } from "../../component/page-title";
-import Link from "../../component/link";
+import { BasalMetabolicRateCalculator } from "../component/calculator/bmr-calculator";
+import { PageTitle } from "../component/page-title";
+import Link from "../component/link";
 import { useState } from "react";
 
 const BasalMetabolicRateCalculatorPage: NextPage = () => {

@@ -8,8 +8,8 @@ import {
   Typography,
 } from "@mui/material";
 import { NextPage } from "next";
-import { UsNavyBodyfatCalculator } from "../../component/calculator/us-navy-girth";
-import { PageTitle } from "../../component/page-title";
+import { UsNavyBodyfatCalculator } from "../component/calculator/us-navy-girth";
+import { PageTitle } from "../component/page-title";
 
 const UsNavyGirthCalculatorPage: NextPage = () => {
   return (

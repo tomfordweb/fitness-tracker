@@ -15,7 +15,9 @@ export const PageTitle = (props: { h1: string; caption?: string }) => {
           </Typography>
         )}
       </Box>
-      <AppBreadcrumbs />
+      <Box sx={{ display: "flex", justifyContent: "center", py: 5 }}>
+        <AppBreadcrumbs />
+      </Box>
     </>
   );
 };

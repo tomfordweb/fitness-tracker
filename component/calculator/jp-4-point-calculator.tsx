@@ -19,7 +19,7 @@ export const JacksonPollock4PointBodyfatCalculator = () => {
   const [bodyFatPercentageFormula, setBodyFatPercentageFormula] = useState("");
 
   return (
-    <div>
+    <>
       <Formik
         initialValues={form}
         validate={(values) => {
@@ -87,6 +87,8 @@ export const JacksonPollock4PointBodyfatCalculator = () => {
             }}
           >
             <SharedJpBodyfatControls
+              bodyFatPercentage={bodyFatPercentage}
+              bodyFatPercentageFormula={bodyFatPercentageFormula}
               formError={formError}
               handleChange={handleChange}
               handleBlur={handleBlur}
@@ -98,8 +100,6 @@ export const JacksonPollock4PointBodyfatCalculator = () => {
           </form>
         )}
       </Formik>
-      <p>Your body fat percentage is: {bodyFatPercentage}</p>
-      <p>{bodyFatPercentageFormula}</p>
-    </div>
+    </>
   );
 };

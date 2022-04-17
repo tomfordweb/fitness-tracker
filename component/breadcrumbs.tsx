@@ -42,7 +42,7 @@ export const AppBreadcrumbs = () => {
   }
 
   return (
-    <Container component="nav" sx={{ py: 3 }}>
+    <>
       <Breadcrumbs aria-label="breadcrumb">
         <Link href="/">HOME</Link>
         {breadcrumbs.map((breadcrumb, i) => {
@@ -59,6 +59,6 @@ export const AppBreadcrumbs = () => {
           );
         })}
       </Breadcrumbs>
-    </Container>
+    </>
   );
 };

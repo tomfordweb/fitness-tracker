@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import { useState } from "react";
-import { TdeeCalculator } from "../../component/calculator/tdee-calculator";
-import { PageTitle } from "../../component/page-title";
+import { TdeeCalculator } from "../component/calculator/tdee-calculator";
+import { PageTitle } from "../component/page-title";
 
 import {
   Container,

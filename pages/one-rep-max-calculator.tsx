@@ -13,10 +13,10 @@ import {
 import { Box } from "@mui/system";
 import { NextPage } from "next";
 import { useState } from "react";
-import { OneRmCalculator } from "../../component/calculator/one-rm-calculator";
-import { PageTitle } from "../../component/page-title";
-import { ResultCard } from "../../component/result-card";
-import { ApiSimpleCalculatedData } from "../api/calculator/one-rep-max";
+import { OneRmCalculator } from "../component/calculator/one-rm-calculator";
+import { PageTitle } from "../component/page-title";
+import { ResultCard } from "../component/result-card";
+import { ApiSimpleCalculatedData } from "./api/calculator/one-rep-max";
 
 // https://goodcalculators.com/bench-press-calculator/
 export const OneRepMaxCalculatorPage: NextPage = () => {

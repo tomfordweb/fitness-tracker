@@ -1,19 +1,11 @@
 import { List, ListItem, ListItemText } from "@mui/material";
+import { Form } from "./calculator/shared-jp-bodyfat-controls";
 
-export const BodyfatMeasurementList = (props: {
-  fields: {
-    chest?: true;
-    midauxilary?: true;
-    tricep?: true;
-    subscapular?: true;
-    abdominal?: true;
-    suprailiac?: true;
-    thigh?: true;
-  };
-}) => {
+export const BodyfatMeasurementList = (props: { fields: Form }) => {
+  console.log(props.fields);
   return (
     <List>
-      {props.fields.chest && (
+      {"chest" in props.fields && (
         <ListItem>
           <ListItemText>
             Chest: The chest measurement is located between the nipple and the
@@ -22,7 +14,7 @@ export const BodyfatMeasurementList = (props: {
           </ListItemText>
         </ListItem>
       )}
-      {props.fields.midauxilary && (
+      {"midauxilary" in props.fields && (
         <ListItem>
           <ListItemText>
             Midaxillary: The midaxiliary location is the horizontal or vertical
@@ -31,7 +23,7 @@ export const BodyfatMeasurementList = (props: {
           </ListItemText>
         </ListItem>
       )}
-      {props.fields.tricep && (
+      {"tricep" in props.fields && (
         <ListItem>
           <ListItemText>
             Tricep: Take a vertical skinfold that is halfway between the top
@@ -39,7 +31,7 @@ export const BodyfatMeasurementList = (props: {
           </ListItemText>
         </ListItem>
       )}
-      {props.fields.subscapular && (
+      {"subscapular" in props.fields && (
         <ListItem>
           <ListItemText>
             Subscapular: The subscapular site is located at the bottom tip of
@@ -47,7 +39,7 @@ export const BodyfatMeasurementList = (props: {
           </ListItemText>
         </ListItem>
       )}
-      {props.fields.abdominal && (
+      {"abdominal" in props.fields && (
         <ListItem>
           <ListItemText>
             Abdominal: For the abdominal measurement, take a horizontal or
@@ -56,7 +48,7 @@ export const BodyfatMeasurementList = (props: {
           </ListItemText>
         </ListItem>
       )}
-      {props.fields.suprailiac && (
+      {"suprailiac" in props.fields && (
         <ListItem>
           <ListItemText>
             Suprailiac: The suprailiac measurement shold be taken be at a
@@ -65,7 +57,7 @@ export const BodyfatMeasurementList = (props: {
           </ListItemText>
         </ListItem>
       )}
-      {props.fields.thigh && (
+      {"thigh" in props.fields && (
         <ListItem>
           <ListItemText>
             Thigh: The thigh measurement is located along the anterior portion

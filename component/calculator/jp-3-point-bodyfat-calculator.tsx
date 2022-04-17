@@ -2,12 +2,10 @@ import { Formik } from "formik";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { BASE_URL } from "../../lib/constant";
-import { ResultCard } from "../result-card";
 import { SharedJpBodyfatControls } from "./shared-jp-bodyfat-controls";
 export const JacksonPollock3PointBodyfatCalculator = () => {
   const router = useRouter();
   const [formError, setFormError] = useState("");
-  const [form, setFormValues] = useState();
 
   const [bodyFatPercentage, setBodyFatPercentage] = useState(0);
   const [bodyFatPercentageFormula, setBodyFatPercentageFormula] = useState("");
@@ -16,7 +14,7 @@ export const JacksonPollock3PointBodyfatCalculator = () => {
     useState("default formula");
 
   return (
-    <div>
+    <>
       <Formik
         enableReinitialize
         initialValues={{
@@ -125,6 +123,10 @@ export const JacksonPollock3PointBodyfatCalculator = () => {
             }}
           >
             <SharedJpBodyfatControls
+              bodyFatPercentage={bodyFatPercentage}
+              bodyDensity={bodyDensity}
+              bodyFatPercentageFormula={bodyFatPercentageFormula}
+              bodyDensityFormula={bodyDensityFormula}
               formError={formError}
               handleChange={handleChange}
               handleBlur={handleBlur}
@@ -136,16 +138,6 @@ export const JacksonPollock3PointBodyfatCalculator = () => {
           </form>
         )}
       </Formik>
-      <ResultCard
-        title="Body Density"
-        value={bodyDensity}
-        formula={bodyDensityFormula}
-      />
-      <ResultCard
-        title="Bodyfat"
-        value={bodyFatPercentage}
-        formula={bodyFatPercentageFormula}
-      />
-    </div>
+    </>
   );
 };

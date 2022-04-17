@@ -3,11 +3,13 @@ import { useState } from "react";
 import { BASE_URL } from "../../lib/constant";
 import { SharedJpBodyfatControls } from "./shared-jp-bodyfat-controls";
 import Joi from "joi";
+import { Grid } from "@mui/material";
+import { ResultCard } from "../result-card";
 
 export const SevenPointBodyFatCalculator = () => {
   const [formError, setFormError] = useState("");
   const [form, setFormValues] = useState({
-    style: Joi.string(),
+    style: "4point",
     gender: "female",
     age: "",
     chest: "",
@@ -25,7 +27,7 @@ export const SevenPointBodyFatCalculator = () => {
   const [bodyDensityFormula, setBodyDensityFormula] = useState("");
 
   return (
-    <div>
+    <>
       <Formik
         initialValues={form}
         validate={(values) => {
@@ -103,6 +105,10 @@ export const SevenPointBodyFatCalculator = () => {
             }}
           >
             <SharedJpBodyfatControls
+              bodyFatPercentage={bodyFatPercentage}
+              bodyDensity={bodyDensity}
+              bodyFatPercentageFormula={bodyFatPercentageFormula}
+              bodyDensityFormula={bodyDensityFormula}
               formError={formError}
               handleChange={handleChange}
               handleBlur={handleBlur}
@@ -114,10 +120,6 @@ export const SevenPointBodyFatCalculator = () => {
           </form>
         )}
       </Formik>
-      <p>Your body density is: {bodyDensity}</p>
-      <p>{bodyDensityFormula}</p>
-      <p>Your body fat percentage is: {bodyFatPercentage}</p>
-      <p>{bodyFatPercentageFormula}</p>
-    </div>
+    </>
   );
 };

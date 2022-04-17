@@ -7,6 +7,7 @@ import {
   Typography,
   Container,
   Grid,
+  Paper,
 } from "@mui/material";
 import type { NextPage } from "next";
 import Link from "../component/link";
@@ -18,30 +19,23 @@ const Home: NextPage = () => {
   return (
     <>
       <PageTitle
-        caption="Browse Our Selection Of Fitness, Health and Nutrition calculators"
-        h1="The Best Fitness Calculators Online"
+        h1="Health and Fitness Calculators"
+        caption="Easy to use tools to monitor body composition and fitness progress."
       />
-      <Container component="section">
-        <Box component="div">
-          <Typography>
-            Monitoring your fitness is essential to living a healthy and happy
-            life. Use our efficient calculators to track and monitor your
-            fitness.
-          </Typography>
-        </Box>
-        <Grid container spacing={3}>
-          {cards.map((card, i) => (
-            <Grid item xs={12} md={6} key={i}>
+      <Container maxWidth="sm" sx={{ mt: 5 }} component="section">
+        {cards.map((card, i) => (
+          <Paper sx={{ mb: 5 }}>
+            <Box key={i}>
               <Card key={i} variant="outlined" sx={{ mb: 3 }}>
                 <CardContent>
-                  <Typography variant="h5">
+                  <Typography sx={{ my: 1 }} component="h2" variant="h5">
                     {card.href.length > 0 ? (
                       <Link href={card.href}>{card.title}</Link>
                     ) : (
                       card.title
                     )}
                   </Typography>
-                  <Typography color="text.secondary">
+                  <Typography sx={{ mb: 3 }} color="text.secondary">
                     {card.description}
                   </Typography>
                   {card.calculators.map((link, i) => (
@@ -56,9 +50,9 @@ const Home: NextPage = () => {
                   ))}
                 </CardContent>
               </Card>
-            </Grid>
-          ))}
-        </Grid>
+            </Box>
+          </Paper>
+        ))}
       </Container>
     </>
   );
