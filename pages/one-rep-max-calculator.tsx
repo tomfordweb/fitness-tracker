@@ -25,10 +25,16 @@ export const OneRepMaxCalculatorPage: NextPage = () => {
   return (
     <>
       <PageTitle h1="One Rep Max (1RM) Calculator" />
-      <Container component="section">
+      <Container maxWidth="sm" component="section">
+        <Typography sx={{ mb: 3 }}>
+          In order to calculate your 1RM, enter the weight and maximum amount of
+          repititions you can perform for the given exercise.
+        </Typography>
         <Box sx={{ mb: 5 }}>
           <OneRmCalculator onSuccess={setOneRms} />
         </Box>
+      </Container>
+      <Container>
         {oneRms && oneRms.length > 0 && (
           <>
             <Typography>
@@ -37,7 +43,7 @@ export const OneRepMaxCalculatorPage: NextPage = () => {
             </Typography>
             <Grid sx={{ my: 3 }} container spacing={2}>
               {oneRms.map((oneRm) => (
-                <Grid key={oneRm.title} item xs={3}>
+                <Grid key={oneRm.title} item xs={6} sm={4} md={3}>
                   <ResultCard {...oneRm} />
                 </Grid>
               ))}
@@ -72,9 +78,9 @@ export const OneRepMaxCalculatorPage: NextPage = () => {
                         {row.title}
                       </TableCell>
 
-                      {oneRms[0].percentages.map((header) => (
+                      {row.percentages.map((percentage) => (
                         <TableCell align="right">
-                          {header.weight.toFixed(1)}
+                          {percentage.weight.toFixed(2)}
                         </TableCell>
                       ))}
                     </TableRow>

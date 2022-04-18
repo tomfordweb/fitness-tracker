@@ -6,7 +6,7 @@ import { SharedJpBodyfatControls } from "./shared-jp-bodyfat-controls";
 export const SevenPointBodyFatCalculator = () => {
   const [formError, setFormError] = useState("");
   const [form, setFormValues] = useState({
-    style: "4point",
+    style: "7point",
     gender: "female",
     age: "",
     chest: "",

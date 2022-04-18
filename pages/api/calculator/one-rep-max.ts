@@ -43,7 +43,9 @@ const calculateOneRms = (weight: number, reps: number) => [
       (100 * weight) /
       (52.2 + 41.9 * Math.pow(Math.E, -0.055 * reps))
     ).toFixed(2),
-    formula: `100 * ${weight} / (52.2 + (41.9 * ${Math.E} ^-0.055 * ${reps}))`,
+    formula: `100 * ${weight} / (52.2 + (41.9 * ${Math.E.toFixed(
+      2
+    )} ^-0.055 * ${reps}))`,
   },
   {
     title: "Lombardi",
@@ -71,6 +73,7 @@ const calculateOneRms = (weight: number, reps: number) => [
     formula: `${weight} * (1 + 0.0333 * ${reps})`,
   },
 ];
+
 export default validate(
   { query: schema },
   (req: NextApiRequest, res: NextApiResponse<ApiSimpleCalculatedData[]>) => {
@@ -79,15 +82,12 @@ export default validate(
 
     let result = calculateOneRms(weight, reps);
 
-    let returnResult: ApiSimpleCalculatedData[] = result.map((result) => ({
-      ...result,
-      percentages: calculatePercentageRange(parseFloat(result.value || "")),
-    }));
-
-    // .map((i: number) => ({
-    //   ...calculateOneRms(weight, i + 1),
-    //   reps: i,
-    // }));
+    let returnResult: ApiSimpleCalculatedData[] = result.map((result) => {
+      return {
+        ...result,
+        percentages: calculatePercentageRange(parseFloat(result.value || "")),
+      };
+    });
 
     res.status(200).json(returnResult);
   }

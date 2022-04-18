@@ -6,16 +6,16 @@ export const PageTitle = (props: { h1: string; caption?: string }) => {
   return (
     <>
       <Box component="header" sx={{ py: 3, bgcolor: "primary.main" }}>
-        <Typography sx={{ mb: 5 }} align="center" component="h1" variant="h1">
+        <Typography align="center" component="h1" variant="h1">
           {props.h1}
         </Typography>
         {props.caption && (
-          <Typography component="p" align="center" variant="h5">
+          <Typography sx={{ mt: 5 }} component="p" align="center" variant="h5">
             {props.caption}
           </Typography>
         )}
       </Box>
-      <Box sx={{ display: "flex", justifyContent: "center", py: 5 }}>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
         <AppBreadcrumbs />
       </Box>
     </>

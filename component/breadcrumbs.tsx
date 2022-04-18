@@ -43,7 +43,7 @@ export const AppBreadcrumbs = () => {
 
   return (
     <>
-      <Breadcrumbs aria-label="breadcrumb">
+      <Breadcrumbs sx={{ py: 5 }} aria-label="breadcrumb">
         <Link href="/">HOME</Link>
         {breadcrumbs.map((breadcrumb, i) => {
           return (
