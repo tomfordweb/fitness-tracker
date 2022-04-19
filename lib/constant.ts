@@ -2,7 +2,7 @@ import { CalculatorLink } from "./interface";
 /**
  * TODO: this should be done differently...
  */
-export const BASE_URL = "http://localhost:3000";
+export const BASE_URL = "http://tracker.tomfordweb.com";
 
 export const NUTRITION_CALCULATORS = [
   {
