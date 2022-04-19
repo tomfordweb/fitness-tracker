@@ -43,7 +43,7 @@ jobs:
 
       - name: Make envfile
         run: |
-          touch .production.env
+          touch .env.production
           echo "NEXT_PUBLIC_BASE_URL=http://tracker.tomfordweb.com" >> .production.env
 
       - name: Build and push frontend
