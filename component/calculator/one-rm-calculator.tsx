@@ -3,11 +3,11 @@ import { Formik } from "formik";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { BASE_URL } from "../../lib/constant";
-import { OneRmCalculations } from "../../pages/strength-calculators/one-rep-max-calculator";
+import { ApiSimpleCalculatedData } from "../../pages/api/calculator/one-rep-max";
 
 // source: https://www.athlegan.com/calculate-1rm
 export const OneRmCalculator = (props: {
-  onSuccess: (data: OneRmCalculations) => void;
+  onSuccess: (data: ApiSimpleCalculatedData) => void;
 }) => {
   const router = useRouter();
   const [formError, setFormError] = useState("");
