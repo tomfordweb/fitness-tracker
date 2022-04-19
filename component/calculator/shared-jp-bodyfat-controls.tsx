@@ -246,7 +246,7 @@ export const SharedJpBodyfatControls = (props: {
           </Grid>
         </Grid>
         <Grid item xs={12} lg={8}>
-          <Image width="1200" height="818" src={imageSrc(props.values)} />
+          <Image width="880" height="600" src={imageSrc(props.values)} />
           <BodyfatMeasurementList fields={props.values} />
         </Grid>
       </Grid>

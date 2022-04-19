@@ -12,11 +12,8 @@ export const ResultCard = (props: {
     return <></>;
   }
   return (
-    <Paper>
-      <Card
-        raised={props?.active || false}
-        sx={{ bgcolor: props?.active ? "secondary.light" : null }}
-      >
+    <div>
+      <Card>
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             {props.title}
@@ -44,6 +41,6 @@ export const ResultCard = (props: {
           </Typography>
         </CardContent>
       </Card>
-    </Paper>
+    </div>
   );
 };

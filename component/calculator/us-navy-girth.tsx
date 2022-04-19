@@ -1,4 +1,5 @@
 import { TextField, Button, Alert } from "@mui/material";
+import { Box } from "@mui/system";
 import { Formik } from "formik";
 import { useState } from "react";
 import { BASE_URL } from "../../lib/constant";
@@ -80,6 +81,7 @@ export const UsNavyBodyfatCalculator = () => {
                 setFormError("An API Error Occured.");
                 return;
               }
+              console.log(data);
               setBodyFatPercentageFormula(data.bodyFatFormula);
               setBodyFatPercentage(data.bodyFat);
             })
@@ -112,7 +114,7 @@ export const UsNavyBodyfatCalculator = () => {
             <TextField
               className="form-control"
               sx={{ mb: 3 }}
-              label="Height Measurement"
+              label="Height Measurement (Inches)"
               id="height"
               name="height"
               type="number"
@@ -126,7 +128,7 @@ export const UsNavyBodyfatCalculator = () => {
               <>
                 <TextField
                   className="form-control"
-                  label="Waist Measurement"
+                  label="Waist Measurement (Inches)"
                   sx={{ mb: 3 }}
                   id="waist"
                   name="waist"
@@ -139,7 +141,7 @@ export const UsNavyBodyfatCalculator = () => {
                 />
                 <TextField
                   className="form-control"
-                  label="Hips Measurement"
+                  label="Hips Measurement (Inches)"
                   id="hips"
                   sx={{ mb: 3 }}
                   name="hips"
@@ -152,7 +154,7 @@ export const UsNavyBodyfatCalculator = () => {
                 />
                 <TextField
                   className="form-control"
-                  label="Neck Measurement"
+                  label="Neck Measurement (Inches)"
                   id="neck"
                   sx={{ mb: 3 }}
                   name="neck"
@@ -169,7 +171,7 @@ export const UsNavyBodyfatCalculator = () => {
               <>
                 <TextField
                   className="form-control"
-                  label="Abdomen Measurement"
+                  label="Abdomen Measurement (Inches)"
                   id="abdomen"
                   name="abdomen"
                   type="number"
@@ -182,7 +184,7 @@ export const UsNavyBodyfatCalculator = () => {
                 />
                 <TextField
                   className="form-control"
-                  label="Neck Measurement"
+                  label="Neck Measurement (Inches)"
                   id="neck"
                   name="neck"
                   sx={{ mb: 3 }}
@@ -195,12 +197,7 @@ export const UsNavyBodyfatCalculator = () => {
                 />
               </>
             )}
-            <Button
-              variant="outlined"
-              type="submit"
-              fullWidth
-              disabled={isSubmitting}
-            >
+            <Button variant="outlined" type="submit" disabled={isSubmitting}>
               Submit
             </Button>
             {Boolean(formError.length) && (
@@ -211,11 +208,13 @@ export const UsNavyBodyfatCalculator = () => {
           </form>
         )}
       </Formik>
-      <ResultCard
-        title="Bodyfat"
-        value={bodyFatPercentage}
-        formula={bodyFatPercentageFormula}
-      />
+      <Box sx={{ mt: 3 }}>
+        <ResultCard
+          title="Bodyfat"
+          value={bodyFatPercentage}
+          formula={bodyFatPercentageFormula}
+        />
+      </Box>
     </div>
   );
 };

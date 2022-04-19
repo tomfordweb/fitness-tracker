@@ -1,6 +1,6 @@
 import { TextField, Button, Alert } from "@mui/material";
 import { Formik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BASE_URL } from "../../lib/constant";
 import { GenderRadioOptions } from "./gender-radio-options";
 export const BasalMetabolicRateCalculator = (props: {
@@ -14,10 +14,15 @@ export const BasalMetabolicRateCalculator = (props: {
     weight: "",
   });
 
-  const [bmr, setBmr] = useState({
-    value: 0,
-    formula: "",
-  });
+  const [bmr, setBmr] = useState<{
+    value: number;
+    formula: string;
+  } | null>(null);
+
+  const [tdee, setTdee] = useState<{
+    activityLevel: string;
+    data: { value: number; multiplier: number; label: string }[];
+  }>({ activityLevel: "", data: [] });
 
   return (
     <div>
@@ -49,7 +54,6 @@ export const BasalMetabolicRateCalculator = (props: {
           fetch(url.toString())
             .then((data) => data.json())
             .then((data) => {
-              console.log(data);
               if (data.ok === false) {
                 setFormError("An API Error Occured.");
                 return;
@@ -139,8 +143,6 @@ export const BasalMetabolicRateCalculator = (props: {
           </form>
         )}
       </Formik>
-      <p>Your Basal Metabolic Rate is {bmr.value}</p>
-      <p>{bmr.formula}</p>
     </div>
   );
 };

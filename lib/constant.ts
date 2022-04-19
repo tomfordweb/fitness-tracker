@@ -6,12 +6,8 @@ export const BASE_URL = "http://localhost:3000";
 
 export const NUTRITION_CALCULATORS = [
   {
-    href: "/basal-metabolic-rate",
-    linkText: "BMR Calculator",
-  },
-  {
-    href: "/total-daily-energy-expenditure",
-    linkText: "TDEE Calculator",
+    href: "/bmr-and-tdee-calculator",
+    linkText: "BMR & TDEE Calculator",
   },
 ];
 
