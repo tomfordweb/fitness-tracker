@@ -7,7 +7,7 @@ import { ApiSimpleCalculatedData } from "../../pages/api/calculator/one-rep-max"
 
 // source: https://www.athlegan.com/calculate-1rm
 export const OneRmCalculator = (props: {
-  onSuccess: (data: ApiSimpleCalculatedData) => void;
+  onSuccess: (data: ApiSimpleCalculatedData[]) => void;
 }) => {
   const router = useRouter();
   const [formError, setFormError] = useState("");

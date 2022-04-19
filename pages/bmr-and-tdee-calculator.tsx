@@ -1,5 +1,4 @@
 import {
-  Paper,
   Container,
   TableContainer,
   TableHead,
@@ -13,11 +12,9 @@ import {
 import { NextPage } from "next";
 import { BasalMetabolicRateCalculator } from "../component/calculator/bmr-calculator";
 import { PageTitle } from "../component/page-title";
-import Link from "../component/link";
 import { useState } from "react";
 import { BASE_URL } from "../lib/constant";
 import { ResultCard } from "../component/result-card";
-import { Box } from "@mui/system";
 
 const BasalMetabolicRateCalculatorPage: NextPage = () => {
   const [bmr, setBmr] = useState<number>(0);
@@ -136,7 +133,7 @@ const BasalMetabolicRateCalculatorPage: NextPage = () => {
           rest, it is necessary to adjust the numbers upwards to account for the
           calories you burn during the day. This is true even for those with a
           sedentary lifestyle. Our TDEE calculator uses the best formulas and
-          displays your score in a way that's easy to read and meaningful.
+          displays your score in a way that&apos;s easy to read and meaningful.
         </Typography>
       </Container>
     </>

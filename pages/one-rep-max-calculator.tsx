@@ -57,8 +57,12 @@ export const OneRepMaxCalculatorPage: NextPage = () => {
                 <TableHead>
                   <TableRow sx={{ bgcolor: "secondary.main" }}>
                     <TableCell>Formula</TableCell>
-                    {oneRms[0].percentages.map((header) => (
-                      <TableCell align="right" sx={{ fontWeight: "bold" }}>
+                    {oneRms[0].percentages.map((header, i) => (
+                      <TableCell
+                        key={i}
+                        align="right"
+                        sx={{ fontWeight: "bold" }}
+                      >
                         {header.percent}%
                       </TableCell>
                     ))}
@@ -78,8 +82,8 @@ export const OneRepMaxCalculatorPage: NextPage = () => {
                         {row.title}
                       </TableCell>
 
-                      {row.percentages.map((percentage) => (
-                        <TableCell align="right">
+                      {row.percentages.map((percentage, i) => (
+                        <TableCell align="right" key={i}>
                           {percentage.weight.toFixed(2)}
                         </TableCell>
                       ))}
