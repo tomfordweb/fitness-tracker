@@ -46,24 +46,21 @@ const BasalMetabolicRateCalculatorPage: NextPage = () => {
     <>
       <PageTitle h1="Basal Metabolic Rate (BMR) Calculator" />
       <Container maxWidth={false} component="section">
-        <Box
-          sx={{
-            mb: 3,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Box>
+        <Grid container spacing={2} sx={{ mb: 3 }}>
+          <Grid item xs={12} lg={4}>
             <Typography sx={{ mb: 3 }}>
               Enter your height in inches and weight in pounds.
             </Typography>
             <BasalMetabolicRateCalculator handleFormUpdate={handleFormUpdate} />
-          </Box>
-          <Box
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            lg={8}
             sx={{
-              ml: 3,
+              mt: 5,
               display: "flex",
+              flexWrap: "wrap",
               alignItems: "center",
               justifyContent: "center",
             }}
@@ -71,45 +68,43 @@ const BasalMetabolicRateCalculatorPage: NextPage = () => {
             <ResultCard title="BMR" value={bmr} formula="Per Day" />
 
             {tdee.length > 0 && (
-              <Box>
-                <TableContainer sx={{ mt: 5, ml: 3 }}>
-                  <Table
-                    sx={{ minWidth: 650 }}
-                    size="small"
-                    aria-label="a dense table"
-                  >
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Activity Level</TableCell>
-                        <TableCell align="right">TDEE</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {tdee.map((tdee) => (
-                        <TableRow
-                          key={tdee.label}
-                          sx={{
-                            "&:last-child td, &:last-child th": { border: 0 },
-                          }}
-                        >
-                          <TableCell component="th" scope="row">
-                            <Typography variant="caption">
-                              {tdee.label}
-                            </Typography>
-                          </TableCell>
+              <TableContainer>
+                <Table
+                  sx={{ minWidth: 650 }}
+                  size="small"
+                  aria-label="a dense table"
+                >
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Activity Level</TableCell>
+                      <TableCell align="right">TDEE</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {tdee.map((tdee) => (
+                      <TableRow
+                        key={tdee.label}
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                      >
+                        <TableCell component="th" scope="row">
+                          <Typography variant="caption">
+                            {tdee.label}
+                          </Typography>
+                        </TableCell>
 
-                          <TableCell align="right">
-                            {tdee.value.toFixed(0)}
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </Box>
+                        <TableCell align="right">
+                          {tdee.value.toFixed(0)}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
             )}
-          </Box>
-        </Box>
+          </Grid>
+        </Grid>
 
         <Typography variant="h4" component="h2">
           What is the Basal Metabolic Rate (BMR)
