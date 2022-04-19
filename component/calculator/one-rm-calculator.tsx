@@ -2,7 +2,6 @@ import { TextField, Button, Grid, Alert } from "@mui/material";
 import { Formik } from "formik";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { BASE_URL } from "../../lib/constant";
 import { ApiSimpleCalculatedData } from "../../pages/api/calculator/one-rep-max";
 
 // source: https://www.athlegan.com/calculate-1rm
@@ -31,7 +30,9 @@ export const OneRmCalculator = (props: {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          const url = new URL(BASE_URL + "/api/calculator/one-rep-max");
+          const url = new URL(
+            process.env.NEXT_PUBLIC_BASE_URL + "/api/calculator/one-rep-max"
+          );
 
           setFormError("");
 
