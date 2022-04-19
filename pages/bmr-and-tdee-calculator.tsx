@@ -13,7 +13,6 @@ import { NextPage } from "next";
 import { BasalMetabolicRateCalculator } from "../component/calculator/bmr-calculator";
 import { PageTitle } from "../component/page-title";
 import { useState } from "react";
-import { BASE_URL } from "../lib/constant";
 import { ResultCard } from "../component/result-card";
 
 const BasalMetabolicRateCalculatorPage: NextPage = () => {
@@ -27,7 +26,8 @@ const BasalMetabolicRateCalculatorPage: NextPage = () => {
     setBmr(parseInt(props.value.toFixed(0)));
 
     const url = new URL(
-      BASE_URL + "/api/calculator/total-daily-energy-expenditure"
+      process.env.NEXT_PUBLIC_BASE_URL +
+        "/api/calculator/total-daily-energy-expenditure"
     );
     url.search = new URLSearchParams({
       bmr: props.value.toString(),

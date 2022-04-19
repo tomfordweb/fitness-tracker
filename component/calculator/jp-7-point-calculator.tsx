@@ -1,6 +1,5 @@
 import { Formik } from "formik";
 import { useState } from "react";
-import { BASE_URL } from "../../lib/constant";
 import { SharedJpBodyfatControls } from "./shared-jp-bodyfat-controls";
 
 export const SevenPointBodyFatCalculator = () => {
@@ -61,7 +60,8 @@ export const SevenPointBodyFatCalculator = () => {
         }}
         onSubmit={(values, { setSubmitting }) => {
           const url = new URL(
-            BASE_URL + "/api/calculator/jackson-pollock-7-point"
+            process.env.NEXT_PUBLIC_BASE_URL +
+              "/api/calculator/jackson-pollock-7-point"
           );
 
           setFormError("");

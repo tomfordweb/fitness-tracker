@@ -1,7 +1,6 @@
 import { TextField, Button, Alert } from "@mui/material";
 import { Formik } from "formik";
 import { useEffect, useState } from "react";
-import { BASE_URL } from "../../lib/constant";
 import { GenderRadioOptions } from "./gender-radio-options";
 export const BasalMetabolicRateCalculator = (props: {
   handleFormUpdate: (props: { value: number; formula: string }) => void;
@@ -46,7 +45,8 @@ export const BasalMetabolicRateCalculator = (props: {
         }}
         onSubmit={(values, { setSubmitting }) => {
           const url = new URL(
-            BASE_URL + "/api/calculator/basal-metabolic-rate"
+            process.env.NEXT_PUBLIC_BASE_URL +
+              "/api/calculator/basal-metabolic-rate"
           );
 
           setFormError("");

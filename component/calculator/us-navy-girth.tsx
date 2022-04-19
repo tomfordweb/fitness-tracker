@@ -2,7 +2,6 @@ import { TextField, Button, Alert } from "@mui/material";
 import { Box } from "@mui/system";
 import { Formik } from "formik";
 import { useState } from "react";
-import { BASE_URL } from "../../lib/constant";
 import { ResultCard } from "../result-card";
 import { GenderRadioOptions } from "./gender-radio-options";
 export const UsNavyBodyfatCalculator = () => {
@@ -54,7 +53,10 @@ export const UsNavyBodyfatCalculator = () => {
           let url: URL;
           let submissionValues: Record<string, string>;
           if (values.gender === "female") {
-            url = new URL(BASE_URL + "/api/calculator/navy-bodyfat-female");
+            url = new URL(
+              process.env.NEXT_PUBLIC_BASE_URL +
+                "/api/calculator/navy-bodyfat-female"
+            );
             submissionValues = {
               waist: values.waist,
               hips: values.hips,
@@ -62,7 +64,10 @@ export const UsNavyBodyfatCalculator = () => {
               height: values.height,
             };
           } else {
-            url = new URL(BASE_URL + "/api/calculator/navy-bodyfat-male");
+            url = new URL(
+              process.env.NEXT_PUBLIC_BASE_URL +
+                "/api/calculator/navy-bodyfat-male"
+            );
             submissionValues = {
               abdomen: values.abdomen,
               neck: values.neck,

@@ -1,7 +1,6 @@
 import { Formik } from "formik";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { BASE_URL } from "../../lib/constant";
 import { SharedJpBodyfatControls } from "./shared-jp-bodyfat-controls";
 export const JacksonPollock3PointBodyfatCalculator = () => {
   const router = useRouter();
@@ -65,7 +64,8 @@ export const JacksonPollock3PointBodyfatCalculator = () => {
           let submissionValues: Record<string, string>;
           if (values.gender === "female") {
             url = new URL(
-              BASE_URL + "/api/calculator/jackson-pollock-3-point-female"
+              process.env.NEXT_PUBLIC_BASE_URL +
+                "/api/calculator/jackson-pollock-3-point-female"
             );
             submissionValues = {
               tricep: values.tricep,
@@ -75,7 +75,8 @@ export const JacksonPollock3PointBodyfatCalculator = () => {
             };
           } else {
             url = new URL(
-              BASE_URL + "/api/calculator/jackson-pollock-3-point-male"
+              process.env.NEXT_PUBLIC_BASE_URL +
+                "/api/calculator/jackson-pollock-3-point-male"
             );
             submissionValues = {
               chest: values.chest,
