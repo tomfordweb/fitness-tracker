@@ -3,12 +3,12 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Link from "./link";
 import { ReactNode } from "react";
 import { createTheme } from "@mui/material/styles";
-import { amber, grey, lightBlue } from "@mui/material/colors";
+import { amber, cyan, lightGreen } from "@mui/material/colors";
 
 const theme = createTheme({
   palette: {
-    primary: lightBlue,
-    secondary: amber,
+    primary: cyan,
+    secondary: lightGreen,
   },
 });
 
@@ -28,11 +28,11 @@ export const Layout = ({ children }: { children: ReactNode }) => {
       <Box component="main" sx={{ minHeight: "100vh" }}>
         {children}
       </Box>
-      <Box component="footer">
+      <Box component="footer" sx={{ bgcolor: "primary.dark", py: 3, mt: 5 }}>
         <Container sx={{ my: 3 }}>
           <Typography
             variant="subtitle1"
-            style={{
+            sx={{
               justifyContent: "center",
               display: "flex",
               alignItems: "center",
@@ -40,11 +40,13 @@ export const Layout = ({ children }: { children: ReactNode }) => {
           >
             &copy; {new Date().getFullYear()} - Made With{" "}
             <FavoriteBorderIcon sx={{ mx: 1 }} /> by{" "}
-            <Link href="https://tomfordweb.com" target="_blank" sx={{ mx: 1 }}>
+            <Link
+              href="https://github.com/tomfordweb"
+              target="_blank"
+              sx={{ mx: 1 }}
+              style={{ color: "white" }}
+            >
               tomfordweb
-            </Link>{" "}
-            <Link href="https://github.com/tomfordweb/fitness-calculator">
-              github
             </Link>
           </Typography>
         </Container>
