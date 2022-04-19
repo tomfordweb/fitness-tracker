@@ -89,4 +89,4 @@ jobs:
         run: ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER}} "docker stop fitness-tracker || true"
 
       - name: Pull Latest image on server
-        run: ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER}} "docker run -p 3000:3000 --name fitness-tracker tomfordweb/fitness-tracker:latest npm start"
+        run: ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER}} "docker run -d -p 3000:3000 --name fitness-tracker tomfordweb/fitness-tracker:latest npm start"
