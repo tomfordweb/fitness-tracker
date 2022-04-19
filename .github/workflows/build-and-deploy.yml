@@ -88,5 +88,5 @@ jobs:
       - name: Stop App if necessary
         run: ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER}} "docker stop fitness-tracker || true"
 
-      - name: Pull Latest image on server
+      - name: Run the updated app
         run: ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER}} "docker run -d -p 3000:3000 --name fitness-tracker tomfordweb/fitness-tracker:latest npm start"
