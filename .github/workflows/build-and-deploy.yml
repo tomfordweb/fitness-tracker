@@ -44,7 +44,8 @@ jobs:
       - name: Make envfile
         run: |
           touch .env.production
-          echo "NEXT_PUBLIC_BASE_URL=http://tracker.tomfordweb.com" >> .env.production
+          echo "NEXT_PUBLIC_BASE_URL=http://trackyour.fitness" >> .env.production
+          echo "NEXT_PUBLIC_GA_MEASUREMENT_ID=${{ secrets.GA_MEASUREMENT_ID }}" >> .env.production
 
       - name: Build and push frontend
         id: docker_build_frontend
