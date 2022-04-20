@@ -92,7 +92,7 @@ jobs:
         run: ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER}} "docker pull tomfordweb/fitness-tracker:latest"
 
       - name: Stop App if necessary
-        run: ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER}} "docker stop fitness-tracker || true"
+        run: ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER}} "docker stop trackyour.fitness || true"
 
       - name: Run the updated app
-        run: ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER}} "docker run --rm -d -p 3000:3000 --name fitness-tracker tomfordweb/fitness-tracker:latest npm start"
+        run: ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER}} "docker run --rm -d -p 3000:3000 --name trackyour.fitness tomfordweb/fitness-tracker:latest npm start"
