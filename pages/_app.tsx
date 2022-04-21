@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import TagManager from "react-gtm-module";
 
 const tagManagerArgs = {
-  gtmId: process.env.NEXT_PUBLIC_GTM_ID,
+  gtmId: "GTM-NX2ZCZR",
 };
 
 function MyApp({ Component, pageProps }: AppProps) {
