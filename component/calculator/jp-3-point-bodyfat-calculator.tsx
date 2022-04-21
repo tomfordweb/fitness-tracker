@@ -96,6 +96,12 @@ export const JacksonPollock3PointBodyfatCalculator = () => {
                 setFormError("An API Error Occured.");
                 return;
               }
+              (window as any).ga.send(
+                "event",
+                "3point",
+                "result",
+                data.bodyFatFormula
+              );
               setBodyDensityFormula(data.bodyDensityFormula);
               setBodyDensity(data.bodyDensity);
               setBodyFatPercentageFormula(data.bodyFatFormula);
