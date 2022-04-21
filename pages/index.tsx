@@ -10,6 +10,7 @@ import {
   Paper,
 } from "@mui/material";
 import type { NextPage } from "next";
+import Head from "next/head";
 import Link from "../component/link";
 import { PageTitle } from "../component/page-title";
 import { CALCULATORS } from "../lib/constant";
@@ -18,6 +19,13 @@ const Home: NextPage = () => {
   const cards = CALCULATORS;
   return (
     <>
+      <Head>
+        <title>Bodyfat Percentage, TDEE and 1RM Calculators</title>
+        <meta
+          name="description"
+          content="We host a variety of exercie and nutrition calculators to assist you with your fitness goals."
+        />
+      </Head>
       <PageTitle
         h1="Health and Fitness Calculators"
         caption="Easy to use tools to monitor body composition and fitness progress."

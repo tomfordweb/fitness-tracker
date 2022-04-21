@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { NextPage } from "next";
+import Head from "next/head";
 import { useState } from "react";
 import { OneRmCalculator } from "../component/calculator/one-rm-calculator";
 import { PageTitle } from "../component/page-title";
@@ -24,6 +25,9 @@ export const OneRepMaxCalculatorPage: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>One Rep Max Calculator - Find Your Strength!</title>
+      </Head>
       <PageTitle h1="One Rep Max (1RM) Calculator" />
       <Container maxWidth="sm" component="section">
         <Typography sx={{ mb: 3 }}>

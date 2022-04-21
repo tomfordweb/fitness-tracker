@@ -7,12 +7,16 @@ import {
   Typography,
 } from "@mui/material";
 import { NextPage } from "next";
+import Head from "next/head";
 import { UsNavyBodyfatCalculator } from "../component/calculator/us-navy-girth";
 import { PageTitle } from "../component/page-title";
 
 const UsNavyGirthCalculatorPage: NextPage = () => {
   return (
     <>
+      <Head>
+        <title>Bodyfat Calculator - US Navy</title>
+      </Head>
       <PageTitle h1="US Navy Bodyfat Calculator" />
       <Container maxWidth={false}>
         <Grid container spacing={2}>

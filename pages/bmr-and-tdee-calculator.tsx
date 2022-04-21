@@ -14,6 +14,7 @@ import { BasalMetabolicRateCalculator } from "../component/calculator/bmr-calcul
 import { PageTitle } from "../component/page-title";
 import { useState } from "react";
 import { ResultCard } from "../component/result-card";
+import Head from "next/head";
 
 const BasalMetabolicRateCalculatorPage: NextPage = () => {
   const [bmr, setBmr] = useState<number>(0);
@@ -41,6 +42,11 @@ const BasalMetabolicRateCalculatorPage: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>
+          Basal Metabolic Rate and Total Daiy Energy Expenditure Calculator
+        </title>
+      </Head>
       <PageTitle h1="Basal Metabolic Rate (BMR) Calculator" />
       <Container maxWidth={false} component="section">
         <Grid container spacing={2} sx={{ mb: 3 }}>
