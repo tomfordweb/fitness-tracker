@@ -42,6 +42,10 @@ export const OneRmCalculator = (props: {
           fetch(url.toString())
             .then((data) => data.json())
             .then((data) => {
+              ((window as any)?.dataLayer || []).push({
+                event: "formSubmission",
+                formType: "1RM",
+              });
               if (data.ok === false) {
                 setFormError("An API Error Occured.");
               } else {
