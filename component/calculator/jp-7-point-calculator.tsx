@@ -1,21 +1,10 @@
 import { Formik } from "formik";
 import { useState } from "react";
+import { pushToDatalayer } from "../../lib/utility";
 import { SharedJpBodyfatControls } from "./shared-jp-bodyfat-controls";
 
 export const SevenPointBodyFatCalculator = () => {
   const [formError, setFormError] = useState("");
-  const [form, setFormValues] = useState({
-    style: "7point",
-    gender: "female",
-    age: "",
-    chest: "",
-    midauxilary: "",
-    tricep: "",
-    subscapular: "",
-    abdominal: "",
-    suprailiac: "",
-    thigh: "",
-  });
 
   const [bodyFatPercentage, setBodyFatPercentage] = useState(0);
   const [bodyFatPercentageFormula, setBodyFatPercentageFormula] = useState("");
@@ -25,7 +14,18 @@ export const SevenPointBodyFatCalculator = () => {
   return (
     <>
       <Formik
-        initialValues={form}
+        initialValues={{
+          style: "7point",
+          gender: "female",
+          age: "",
+          chest: "",
+          midauxilary: "",
+          tricep: "",
+          subscapular: "",
+          abdominal: "",
+          suprailiac: "",
+          thigh: "",
+        }}
         validate={(values) => {
           const errors: Record<string, string> = {};
           if (!values.age) {
@@ -74,6 +74,12 @@ export const SevenPointBodyFatCalculator = () => {
                 setFormError("An API Error Occured.");
                 return;
               }
+              pushToDatalayer({
+                event: "formSubmission",
+                formType: data.style,
+                ...data,
+                value: data.bodyFat,
+              });
               setBodyDensityFormula(data.bodyDensityFormula);
               setBodyDensity(data.bodyDensity);
               setBodyFatPercentageFormula(data.bodyFatFormula);

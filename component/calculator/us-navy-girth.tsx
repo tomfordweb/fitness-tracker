@@ -2,18 +2,12 @@ import { TextField, Button, Alert } from "@mui/material";
 import { Box } from "@mui/system";
 import { Formik } from "formik";
 import { useState } from "react";
+import { pushToDatalayer } from "../../lib/utility";
 import { ResultCard } from "../result-card";
 import { GenderRadioOptions } from "./gender-radio-options";
+
 export const UsNavyBodyfatCalculator = () => {
   const [formError, setFormError] = useState("");
-  const [form, setFormValues] = useState({
-    gender: "female",
-    height: "",
-    abdomen: "",
-    neck: "",
-    waist: "",
-    hips: "",
-  });
 
   const [bodyFatPercentage, setBodyFatPercentage] = useState(0);
   const [bodyFatPercentageFormula, setBodyFatPercentageFormula] = useState("");
@@ -21,7 +15,14 @@ export const UsNavyBodyfatCalculator = () => {
   return (
     <div>
       <Formik
-        initialValues={form}
+        initialValues={{
+          gender: "female",
+          height: "",
+          abdomen: "",
+          neck: "",
+          waist: "",
+          hips: "",
+        }}
         validate={(values) => {
           const errors: Record<string, string> = {};
           if (!values.height) {
@@ -86,7 +87,11 @@ export const UsNavyBodyfatCalculator = () => {
                 setFormError("An API Error Occured.");
                 return;
               }
-              console.log(data);
+              pushToDatalayer({
+                event: "formSubmission",
+                formType: "bodyfatNavy",
+                value: data.bodyFat,
+              });
               setBodyFatPercentageFormula(data.bodyFatFormula);
               setBodyFatPercentage(data.bodyFat);
             })

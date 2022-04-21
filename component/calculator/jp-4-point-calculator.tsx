@@ -1,18 +1,10 @@
 import { Formik } from "formik";
 import { useState } from "react";
+import { pushToDatalayer } from "../../lib/utility";
 import { SharedJpBodyfatControls } from "./shared-jp-bodyfat-controls";
 
 export const JacksonPollock4PointBodyfatCalculator = () => {
   const [formError, setFormError] = useState("");
-  const [form, setFormValues] = useState({
-    style: "4point",
-    gender: "female",
-    age: "",
-    tricep: "",
-    abdominal: "",
-    suprailiac: "",
-    thigh: "",
-  });
 
   const [bodyFatPercentage, setBodyFatPercentage] = useState(0);
   const [bodyFatPercentageFormula, setBodyFatPercentageFormula] = useState("");
@@ -20,7 +12,15 @@ export const JacksonPollock4PointBodyfatCalculator = () => {
   return (
     <>
       <Formik
-        initialValues={form}
+        initialValues={{
+          style: "4point",
+          gender: "female",
+          age: "",
+          tricep: "",
+          abdominal: "",
+          suprailiac: "",
+          thigh: "",
+        }}
         validate={(values) => {
           const errors: Record<string, string> = {};
           if (!values.age) {
@@ -60,6 +60,12 @@ export const JacksonPollock4PointBodyfatCalculator = () => {
                 setFormError("An API Error Occured.");
                 return;
               }
+              pushToDatalayer({
+                event: "formSubmission",
+                formType: data.style,
+                ...data,
+                value: data.bodyFat,
+              });
               setBodyFatPercentageFormula(data.bodyFatFormula);
               setBodyFatPercentage(data.bodyFat);
               setSubmitting(false);

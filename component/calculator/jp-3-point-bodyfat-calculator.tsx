@@ -1,6 +1,7 @@
 import { Formik } from "formik";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { pushToDatalayer } from "../../lib/utility";
 import { SharedJpBodyfatControls } from "./shared-jp-bodyfat-controls";
 export const JacksonPollock3PointBodyfatCalculator = () => {
   const router = useRouter();
@@ -96,12 +97,12 @@ export const JacksonPollock3PointBodyfatCalculator = () => {
                 setFormError("An API Error Occured.");
                 return;
               }
-              (window as any).ga.send(
-                "event",
-                "3point",
-                "result",
-                data.bodyFatFormula
-              );
+              pushToDatalayer({
+                event: "formSubmission",
+                formType: data.style,
+                ...data,
+                value: data.bodyFat,
+              });
               setBodyDensityFormula(data.bodyDensityFormula);
               setBodyDensity(data.bodyDensity);
               setBodyFatPercentageFormula(data.bodyFatFormula);

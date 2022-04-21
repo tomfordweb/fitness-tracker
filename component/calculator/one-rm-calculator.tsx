@@ -2,6 +2,7 @@ import { TextField, Button, Grid, Alert } from "@mui/material";
 import { Formik } from "formik";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import { pushToDatalayer } from "../../lib/utility";
 import { ApiSimpleCalculatedData } from "../../pages/api/calculator/one-rep-max";
 
 // source: https://www.athlegan.com/calculate-1rm
@@ -42,13 +43,13 @@ export const OneRmCalculator = (props: {
           fetch(url.toString())
             .then((data) => data.json())
             .then((data) => {
-              ((window as any)?.dataLayer || []).push({
-                event: "formSubmission",
-                formType: "1RM",
-              });
               if (data.ok === false) {
                 setFormError("An API Error Occured.");
               } else {
+                pushToDatalayer({
+                  event: "formSubmission",
+                  formType: "1RM",
+                });
                 props.onSuccess(data);
               }
             });

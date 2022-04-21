@@ -1,32 +1,22 @@
 import { TextField, Button, Alert } from "@mui/material";
 import { Formik } from "formik";
 import { useEffect, useState } from "react";
+import { pushToDatalayer } from "../../lib/utility";
 import { GenderRadioOptions } from "./gender-radio-options";
 export const BasalMetabolicRateCalculator = (props: {
   handleFormUpdate: (props: { value: number; formula: string }) => void;
 }) => {
   const [formError, setFormError] = useState("");
-  const [form, setFormValues] = useState({
-    gender: "female",
-    age: "",
-    height: "",
-    weight: "",
-  });
-
-  const [bmr, setBmr] = useState<{
-    value: number;
-    formula: string;
-  } | null>(null);
-
-  const [tdee, setTdee] = useState<{
-    activityLevel: string;
-    data: { value: number; multiplier: number; label: string }[];
-  }>({ activityLevel: "", data: [] });
 
   return (
     <div>
       <Formik
-        initialValues={form}
+        initialValues={{
+          gender: "female",
+          age: "",
+          height: "",
+          weight: "",
+        }}
         validate={(values) => {
           const errors: Record<string, string> = {};
           if (!values.age) {
@@ -59,7 +49,10 @@ export const BasalMetabolicRateCalculator = (props: {
                 return;
               }
               props.handleFormUpdate(data);
-              setBmr(data);
+              pushToDatalayer({
+                event: "formSubmission",
+                formType: "BMR",
+              });
               setSubmitting(false);
             })
             .catch((error) => {
