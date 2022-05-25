@@ -4,6 +4,7 @@ import Link from "./link";
 import { ReactNode } from "react";
 import { createTheme } from "@mui/material/styles";
 import { amber, cyan, lightGreen } from "@mui/material/colors";
+import LoginButton from "../component/login-button";
 
 const theme = createTheme({
   palette: {
@@ -25,6 +26,7 @@ theme.typography.h1 = {
 export const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <ThemeProvider theme={theme}>
+      <LoginButton />
       <Box component="main" sx={{ minHeight: "100vh" }}>
         {children}
       </Box>

@@ -4,6 +4,7 @@ import { Layout } from "../component/layout";
 import Script from "next/script";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { SessionProvider } from "next-auth/react";
 
 import TagManager from "react-gtm-module";
 
@@ -16,9 +17,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     TagManager.initialize(tagManagerArgs);
   }, []);
   return (
+    <SessionProvider>
     <Layout>
       <Component {...pageProps} />
     </Layout>
+    </SessionProvider>
   );
 }
 

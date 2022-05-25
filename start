@@ -1,0 +1,16 @@
+#!/bin/bash
+
+docker stop mongodb || true
+docker run \
+-d \
+--rm \
+--name mongodb \
+-p 27017:27017 \
+-e MONGO_INITDB_ROOT_USERNAME=tracker \
+-e MONGO_INITDB_ROOT_PASSWORD=abc123 \
+mongo
+
+npm run dev
+mongo
+
+npm run dev
